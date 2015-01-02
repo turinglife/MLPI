@@ -4,7 +4,7 @@ This is a graduate-level introduction to machine learning and probabilistic infe
 
 ## Prerequisites
 
-Machine learning is a subject that relies heavily on mathematical and statistical analysis. Students who take this course should have *good* understanding on *linear algebra* and *elementary probabilistic theory*. 
+Machine learning is a subject that relies heavily on mathematical and statistical analysis. Students who take this course should have *good* understanding of *linear algebra* and *elementary probabilistic theory*. 
 
 ## Course Format
 
