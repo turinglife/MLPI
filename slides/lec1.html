@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lecture 1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Lecture 1 - Overview of Learning and Inference
+
+.center[Dahua Lin]
+
+.center[*The Chinese University of Hong Kong*]
+
+---
+
+# Overview
+
+- This is a *graduate level* introduction to *statistical learning*. 
+
+- The course is *not* to teach you:
+	- Support Vector Machine
+	- Linear Regression
+	- ...
+	- Deep Learning
+
+- Instead, you are going to learn *foundational tools* for developing *your own* models and algorithms.
+
+---
+
+
+# Course Format
+
+- **No Exams**
+
+- Topic driven
+
+- For each topic:
+	- Introductory lecture
+	- Paper reading and Homework
+	- In-class discussion
+
+- You will present a paper/subject at the end of the course
+
+---
+
+
+# Topics
+
+- Overview of learning and inference, Math foundations
+
+- Exponential family distributions and conjugate prior
+
+- Generalized linear model
+
+- Empirical risk minimization and Stochastic gradient descent 
+
+- Proximal methods for optimization
+
+- Graphical models: Bayesian Networks and Markov random fields
+
+- Sum-product & max-product algorithms, Belief propagation
+
+- Variational inference methods
+
+- Markov Chain Monte Carlo
+
+- Handling Big Data: Streaming process & Core sets
+
+    </textarea>
+    <script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript"></script>
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+
+      // Setup MathJax
+      MathJax.Hub.Config({
+          tex2jax: {
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+      });
+      MathJax.Hub.Queue(function() {
+          $(MathJax.Hub.getAllJax()).map(function(index, elem) {
+              return(elem.SourceElement());
+          }).parent().addClass('has-jax');
+      });
+
+      MathJax.Hub.Configured();
+    </script>
+  </body>
+</html>
