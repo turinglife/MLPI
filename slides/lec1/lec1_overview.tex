@@ -1,0 +1,167 @@
+\documentclass{beamer}
+
+\usetheme{ClassyCharcoal}
+\usefonttheme{structurebold}
+\newenvironment{witemize}{\itemize\addtolength{\itemsep}{15pt}}{\enditemize}
+
+\usepackage{graphicx}
+
+\begin{document}
+
+
+%%--------- Title ------------
+
+\title{Lecture 1: Overview of Machine Learning}
+\author{Dahua Lin}
+\institute{The Chinese University of Hong Kong}
+\date{}
+\frame{\titlepage}
+
+
+%%---------  Main Body ------------
+
+\begin{frame}{About this course}
+
+\begin{witemize}
+    \item This is a \emph{graduate level} introduction to \emph{statistical learning}. 
+    \item The course is \emph{not} to teach you:
+    \begin{itemize}
+        \item Support Vector Machine
+        \item Linear Regression
+        \item ...
+        \item Deep Learning
+    \end{itemize}
+    \item Instead, you are going to learn \emph{foundational tools} for developing \emph{your own} models and algorithms.
+\end{witemize}
+\end{frame}
+
+
+% ---
+
+
+\begin{frame}{Course Format}
+
+\begin{witemize}
+    \item \structure{No Exams!}
+    \item Topic driven
+    \item For each topic:
+    \begin{itemize}
+        \item Introductory lecture
+        \item Paper reading and Homework
+        \item In-class discussion
+    \end{itemize}
+    \item You will present a paper/subject at the end of the course
+\end{witemize}
+\end{frame}
+
+
+% ---
+
+
+\begin{frame}{}
+
+{\Large \em What is \structure{Machine Learning}?}
+
+$ $
+\pause
+
+\begin{quote}
+    \emph{Machine learning} is a scientific discipline that explores the construction and study 
+    of algorithms that can learn from data. Such algorithms operate by building a model based on 
+    inputs and using that to make predictions and decisions, rather than following only explicitly 
+    programmed instructions.   -- Wikipedia
+\end{quote}
+\end{frame}
+
+
+% ---
+
+
+\begin{frame}{Elements of Machine Learning}
+\begin{witemize}
+    \item Elements:
+    \begin{itemize}
+        \item Data
+	    \item Model
+        \item Learning Algorithm
+        \item Prediction
+    \end{itemize}
+    \item Learn from old data, make predictions on new data. 
+    The common aspects of both the old and new data are captured by the model.
+\end{witemize}
+\end{frame}
+
+
+% ---
+
+\begin{frame}{}
+
+Please write down five machine learning algorithms that you know
+
+$ $
+
+Don't write \emph{Deep Learning}
+\end{frame}
+
+
+% ---
+
+
+\begin{frame}{Overview of Machine Learning}
+\begin{witemize}
+    \item Tasks
+    \begin{itemize}
+        \item Supervised learning
+	    \item Unsupervised learning
+	    \item Semi-supervised learning
+	    \item Reinforcement learning
+    \end{itemize}
+    \item Problems
+    \begin{itemize}
+        \item Classification
+	    \item Regression
+	    \item Clustering
+	    \item Dimension reduction
+	    \item Density estimation
+    \end{itemize}
+\end{witemize}
+\end{frame}
+
+
+% ---
+
+
+\begin{frame}{Topics}
+\begin{itemize}
+    \item Exponential family distributions and conjugate prior
+    \item Generalized linear model
+    \item Empirical risk minimization and Stochastic gradient descent 
+    \item Proximal methods for optimization
+    \item Graphical models: Bayesian Networks and Markov random fields
+    \item Sum-product and max-product algorithms, Belief propagation
+    \item Variational inference methods
+    \item Markov Chain Monte Carlo
+    \item Gaussian Processes and Copula Processes
+    \item Handling Big Data: Streaming process and Core sets
+\end{itemize}
+\end{frame}
+
+
+% ---
+
+
+\begin{frame}{}
+\begin{center}
+Let's take a five-minute break.
+\end{center}
+\end{frame}
+
+
+
+
+
+
+
+
+
+\end{document}
