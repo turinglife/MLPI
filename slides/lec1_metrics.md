@@ -1,5 +1,5 @@
 ---
-title: Lecture 1 - Mathematics of Metrics
+title: Lecture 1 - Metrics and Kernels
 shorttitle: Lecture 1
 ---
 
@@ -107,7 +107,38 @@ shorttitle: Lecture 1
 
 ---
 
+# Norms and Banach Spaces #
 
+- Things become much more interesting when *vector spaces* meet with *metrics*.
+
+. . .
+
+- Consider a *vector space* $\Omega$, a function $\|\cdot\|: \Omega \mapsto \mathbb{R}$ is called a *norm* if:
+	- $\|\mathbf{x}\| \ge 0, \forall \mathbf{x} \in \Omega$
+	- $\|\mathbf{x}\| = 0$ iff $x = 0$. ($\|\cdot\|$ is called a *seminorm* without this)
+	- $\|\alpha \mathbf{x}\| = |\alpha| \cdot \|\mathbf{x}\|, \ \forall \alpha \in \mathbb{R}, \mathbf{x} \in \Omega$.
+	- $\|\mathbf{x} + \mathbf{y}\| \le \|\mathbf{x}\| + \|\mathbf{y}\|, \ \forall \mathbf{x}, \mathbf{y} \in \Omega$.
+- A vector space together with a norm, as $(\Omega, \|\cdot\|)$, is called a *normed space*. 
+	- A *normed space* is always a *metric space*, where the *norm* induces a *metric* as $d(\mathbf{x}, \mathbf{y}) = \|\mathbf{x} - \mathbf{y}\|$.
+- A *complete normed space* is called a *Banach space*.
+
+---
+
+# Examples of Norms #
+
+Consider a real vector space $\mathbb{R}^m$. For each $p \ge 1$, we can define $L_p$-norm as:
+
+$$\| \mathbf{x} \|_p \triangleq \left( \sum_{i=1}^m |x^{(i)}|^p \right)^{1/p}$$
+
+It can be easily verified that $\|\cdot\|_p$ is a *norm*. When $p$ is set to $\infty$, $L_\infty$-norm is still a *norm*, defined as
+
+$$\| \mathbf{x} \|_\infty \triangleq \max_{i=1}^m |x^{(i)}|$$
+
+We will extend these norms to the *space of functions*.
+
+---
+
+# Inner Products and Hilbert Spaces #
 
 
 
