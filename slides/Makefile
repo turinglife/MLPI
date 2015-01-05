@@ -7,10 +7,13 @@ all: slides
 
 slides: \
 	lec0_overview.pdf \
-	lec1_metrics.pdf
+	lec1_math.pdf
 
 lec0_overview.pdf: $(PRE) lec0_overview.md
 	$(CMD) lec0_overview.md -o $@
 
-lec1_metrics.pdf: $(PRE) lec1_metrics.md
-	$(CMD) lec1_metrics.md -o $@
+LEC1_SRC = \
+	lec1_functional.md
+
+lec1_math.pdf: $(PRE) $(LEC1_SRC)
+	$(CMD) $(LEC1_SRC) -o $@
