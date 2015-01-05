@@ -41,6 +41,23 @@ We will extend these norms to the *space of functions*.
 
 ---
 
+# Convergence of Vectors and Basis #
+
+- Let $x_1, x_2, \ldots$ be a sequence of vectors in a Banach space, we say $(x_n)$ *converges* to $x$ if $\|x_n - x\| \rightarrow 0$ as $n \rightarrow \infty$.
+	- This is sometimes called *convergence in norm*.
+
+- Consider an infinite series $s = x_1 + x_2 + \cdots$ in a Banach space, then $s$ is said to be *absolutely convergent* if $\|x_1\| + \|x_2\| + \cdots$ converges.
+
+. . .
+
+- Let $(e_n)$ be a sequence in a Banach space $\Omega$, it is called a *(Schauder) basis* of $\Omega$ if for each $x \in \Omega$, there exists a unique sequence of real values $(\alpha_n)$ such that 
+
+	$$\|x - (\alpha_1 e_1 + \cdots + \alpha_n e_n)\| \rightarrow 0, \quad \text{ as } n \rightarrow 0$$ 
+
+- Not every Banach space has a Schauder basis.
+
+---
+
 # Inner Products and Hilbert Spaces #
 
 - An inner product on a real vector space $\Omega$ is a mapping $(x, y) \mapsto \langle x, y \rangle$ that satisfies:
@@ -127,5 +144,105 @@ Let $X$ and $Y$ be normed spaces, and $T: X \rightarrow Y$ be a linear operator:
 	- Is $f_m$ a linear functional?
 	- Is $f_m$ bounded?
 
+---
+
+# Orthogonality and Projection #
+
+Let $\Omega$ be a Hilbert space:
+
+- $x, y \in \Omega$ are said to be *orthogonal* to each other, denoted by $x \perp y$, if $\langle x, y \rangle = 0$.
+- A subset $M \subset \Omega$ is called an *orthogonal set* if elements of $M$ are mutually orthogonal. Moreover, if each element has a unit norm, then $M$ is called an *orthonormal set*.
+- *(Pythagorean theorem)* $x \perp y \Leftrightarrow \|x\|^2 + \|y\|^2 = \|x + y\|^2$.
+
+. . .
+
+- Let $x \in \Omega$ and $S \subset \Omega$, then the *distance* between $x$ and $S$ is defined to be $d(x, S) \triangleq \inf_{y \in S} d(x, y)$.
+
+- Let $S$ be a non-empty convex closed subset of $\Omega$. Then there exists a unique element $y_* \in S$ such that $d(x, y_*) = d(x, S)$. This element $y_*$ is called the *projection* of $x$ onto $S$, denoted by $\mathrm{proj}_S(x)$.
+
+...
+
+- **Question:** Why does $S$ need to be closed and convex?
+
+---
+
+# Orthogonality and Projection (cont'd) #
+
+Let $\Omega$ be a Hilbert space and $S$ be a subspace of $\Omega$:
+
+- Given $x \in \Omega$ and $y = \mathrm{proj}_S(x)$, then $x - y \perp S$, meaning that $x - y \perp z, \forall z \in S$.
+
+Let $P = \mathrm{proj}_S$ be a projection, where $S$ is non-empty:
+
+- $P$ is a bounded operator with $\|P\|_{op} = 1$.
+- $P$ is *idempotent*, namely, $P^2 = P$, *i.e.* $P^2 x = P(Px) = Px$.
+
+---
+
+# Direct Sum and Orthogonal Complement #
+
+- A vector space $Z$ is said to be the *direct sum* of two subspaces $X$ and $Y$, denoted by $X \oplus Y$, if each $z \in Z$ can be expressed *uniquely* as $x + y$ with $x \in X$ and $y \in Y$. 
+
+- Let $S$ be a subspace of $\Omega$. The *orthogonal complement* of $S$, denoted by $S^\perp$, is defined to be $S^\perp \triangleq \{y \in \Omega: y \perp S\}$. 
+	- $S^\perp$ is also a subspace of $\Omega$.
+
+- *(Projection theorem)* $S \oplus S^\perp = \Omega$
+	- Each $x \in \Omega$ can be expressed uniquely as $x = y + z$ with $y \in S$ and $z \in S^\perp$. Particularly, we have $y = \mathrm{proj}_S(x)$ and $z = x - y$. 
+	
+- $S^{\perp \perp} = S$.
+
+---
+
+# Orthonormal Basis of Hilbert Space #
+
+- Let $\Omega$ be a Hilbert space, a subset $M \subset \Omega$ is called a *total subset* of $\Omega$ if $cl(\mathrm{span}(M)) = \Omega$.
+
+- $M$ is a *total subset* of $\Omega$ if and only if $x \perp M \Rightarrow x = 0$.
+
+- A *total orthonormal set* is called an *orthonormal basis*.
+
+- *(Parseval theorem)* An orthonormal sequence $(e_k)$ is *total* if and only if
+
+	$$\sum_k \left|\langle x, e_k \rangle\right|^2 = \|x\|^2, \quad \forall x \in \Omega$$
+	
+	In this case, each $x \in \Omega$ can be uniquely expressed as
+	
+	$$x = \sum_k \langle x, e_k \rangle e_k$$
+	
+	Here, the value $\langle x, e_k \rangle$ is sometimes called the *Fourier coefficients*.
+
+. . .
+
+- **Question:** Why $\mathrm{span}(M) \ne \Omega$ in general?
+
+---
+
+# Representation of Functionals #
+
+- *(Riesz's theorem)* Every *bounded* linear functional $f$ on a Hilbert space $\Omega$ can be represented in terms of inner product, namely, $f(x) = \langle x, z \rangle$, where $z$ is uniquely determined by $f$ and has $\|z\| = \|f\|_*$. 
+
+. . .
+
+- **Question:** How can you find $z$ given $f$?
+
+. . .
+
+- For a Hilbert space with a countable orthonormal basis $(e_k)$, we have
+
+	$$z = \sum_k f(e_k) e_k$$
+
+---
+
+# Bilinear Forms #
+
+- Let $X$ and $Y$ be Hilbert spaces. Then the function $h: X \times Y \rightarrow \mathbb{R}$ is called a *bilinear form* if it is linear *w.r.t* each argument with the other fixed.
+
+- Let $h$ be a *bilinear form* on $X \times Y$, then $h$ is said to be *bounded* if there exists $c > 0$ with $|h(x, y)| \le c \|x\| \|y\|, \forall x \in X, y \in Y$. In such case, the norm of $h$ is defined to be 
+	
+	$$\|h\| = \sup_{x \ne 0, y \ne 0} \frac{|h(x,y)|}{\|x\|\|y\|}$$
+
+	Hence, we always have $|h(x,y)| \le \|h\|\|x\|\|y\|$.
+	
+- *(Generalized Riesz's theorem)* Let $h$ be a *bounded* bilinear form on $X \times Y$. Then $h$ has a representation as $h(x, y) = \langle Sx, y \rangle$, where $S$ is a bounded linear operator uniquely determined by $h$ and have $\|S\|_{op} = \|h\|$.
 
 
