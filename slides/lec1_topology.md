@@ -202,3 +202,24 @@ Let $S$ be a subset of a complete metric space $(\Omega, d)$:
 - A *continuous function* is *uniformly continuous* over a compact domain.
 - A *continuously differentiable function* is *Lipschitz continuous* over a compact domain.
 
+---
+
+# Contraction and Fixed Points #
+
+Consider a function $f: \Omega \rightarrow \Omega$. 
+
+- $x \in \Omega$ is called a *fixed point* of $f$ if $f(x) = x$.
+	- Some functions may not have fixed points, *e.g.* $x \mapsto x + a$
+	- Some functions may have infinitely many fixed points, *e.g.* $x \mapsto x$
+
+- A function $f: \Omega \rightarrow \Omega$ defined on a metric space $(\Omega, d)$ is called a *contraction* if it is *Lipschitz continuous* with $L < 1$.
+
+- *(Banach fixed point theorem)* Let $f$ be a *contraction* on a metric space $(\Omega, d)$, then $f$ has a unique fixed point.
+
+- Let $f$ be a contraction with fixed point $x_*$. Consider an iterative sequence $x_0, x_1 = f(x_0), x_2 = f(x_1), \ldots$, then $x_n \rightarrow x_*$ as $n \rightarrow \infty$. 
+	- *(Prior error estimate):* $d(x_m, x) \le \frac{L^m}{1 - L} d(x_0, x_1)$.
+	- *(Posterior error estimate):* $d(x_m, x) \le \frac{L}{1 - L} d(x_{m-1}, x_m)$.
+
+
+
+

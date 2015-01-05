@@ -70,11 +70,62 @@ We will extend these norms to the *space of functions*.
 
 ---
 
-# From Vectors to Functions #
+# Linear Operators and Functionals #
 
-- In elementary linear algebra, we have learned a lot about handling *finite dimensional vectors*, *e.g.* computing *norms* and *dot products*.
-- In this lecture, we are going to extend many of these concepts to the *space of functions*.
-    - The key here is to compute *norms* and *inner products* over functions.
-    - These operations generally involve *integration*.
+- Let $X$ and $Y$ be two linear spaces, a function: $T: X \rightarrow Y$ is called a *linear operator* if it preserves *linear dependency*, that is, 
+
+	$$T(\alpha x_1 + \beta x_2) = \alpha T(x_1) + \beta T(x_2), \ \forall x_1, x_2 \in X, \alpha, \beta \in \mathbb{R}$$
+	
+	In particular, when $Y$ is $\mathbb{R}$, $T$ is called a *linear functional*.
+
+- The set $\mathscr{N}(T) \triangleq \{x: T(x) = 0\}$ is a subspace of $X$, called the *null space* of $T$.
+
+---
+
+# Bounded Operators #
+
+Let $X$ and $Y$ be normed spaces, and $T: X \rightarrow Y$ be a linear operator:
+
+- $T$ is said to be *bounded*, if $\exists c > 0, \forall x \in X, \|Tx\| \le c \|x\|$.
+- The *(operator) norm* of $T$ is defined as
+
+	$$\|T\|_{op} \triangleq \sup_{x \ne 0} \frac{\|Tx\|}{\|x\|}$$ 
+	
+	Hence, $\|Tx\| \le \|T\|_{op} \|x\|$ always holds.
+- Given a linear operator $T$, the following statements are equivalent:
+	- $T$ is bounded
+	- $T$ is continuous
+	- $\|T\|$ is finite 
+- All linear operators with finite dimensional domain are bounded.
+
+---
+
+# Space of Bounded Operators and Dual Space #
+
+- All *bounded* operators $T: X \rightarrow Y$ form a *normed space*, denoted by $B(X, Y)$. 
+	- When $Y$ is a Banach space, $B(X, Y)$ is a Banach space.
+- All *bounded* functionals $f: X \rightarrow \mathbb{R}$ form a *normed space*, called the *dual space* of $X$, denoted by $X^*$, where the norm is called the *dual norm*, defined as:
+
+	$$\|f\|_* = \sup_{x \ne 0} \frac{|f(x)|}{\|x\|}$$
+	
+	Note $X^*$ is always a Banach space, no matter whether $X$ is or not.
+	
+- The dual space of $\mathbb{R}^n$ is isomorphic to $\mathbb{R}^n$.
+
+---
+
+# Function Space and Uniform Norm #
+
+- The set of all continuous real valued functions defined on a *compact space* $\Omega$ forms a normed vector space, denoted by $C(\Omega)$, where the norm is defined by $\|x\| = \sup_{v \in S} x(v)$, which is called the *uniform norm* (or *Chebyshev norm*).
+	- When $\Omega$ is a closed interval $[a, b]$, $C(\Omega)$ is often written as $C[a, b]$.
+- Given any compact space $\Omega$, $C(\Omega)$ is a *Banach space*.
+- There are other ways to define norms of functions, which we will discuss later.
+
+. . .
+
+- **Question:** Let $C'[a, b]$ be a subspace of $C[a, b]$ that comprises all *continuously differentiable functions* on $[a, b]$. Let $m = (a + b) / 2$. We define a functional as $f_m: x \mapsto x'(m)$ which takes the derivative at $m$. 
+	- Is $f_m$ a linear functional?
+	- Is $f_m$ bounded?
+
 
 
