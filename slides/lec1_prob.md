@@ -1,7 +1,9 @@
 # Measure Theory #
 
 - *Measure theory* studies *assigning values to subsets*.
-- Modern probability theory is based entirely on measure theory.
+- Measure theory is the corner stone of many math subjects
+	- Modern approach to integration is based on measure theory.
+	- Modern probability theory is based entirely on measure theory.
 - Intuitively, the *measure* of a set can be intepreted as the *size*, *e.g.* the length of an interval.
 
 . . .
@@ -131,4 +133,81 @@ We are not done yet ...
 . . .
 
 - The *Borel measure space* is generally not *complete*. The *completion* of the *Borel measure space* is called the *Lebesgue measure space*, and the extended measure is called *Lebesgue measure*.
+
+---
+
+# Lebesgue Integral: Roadmap #
+
+We derive the *Lebesgue integral* in a way that begins with simple functions and then extends the definition to more complicated functions:
+
+. . .
+
+Let $(\Omega, \mathcal{S}, \mu)$ be a measure space:
+
+- Indicator functions -- the integral of an indicator function $1_A$ of a *measurable* set $A \in \mathcal{S}$ is defined to be the *measure* of $A$, as
+
+	$$\int 1_A d\mu = \mu(A)$$
+	
+. . .
+
+- Simple functions -- linear combinations of indicator functions:
+
+	$$\int \sum_k \alpha_k 1_{A_k} d\mu = \sum_k \alpha_k \int 1_{A_k} d\mu = \sum_k \alpha_k \mu(A_k)$$
+
+. . .
+
+- Non-negative functions -- through approximation
+
+- Signed functions -- decompose as $f = f_+ - f_-$.
+
+---
+
+# Lebesgue Integral (cont'd) #
+
+- Let $s$ be a *non-negative* function on $\Omega$, then we define
+
+	$$\int f d\mu = \sup \left\{ \int s d\mu: 0 \le s \le f, s \text{ simple} \right\}$$
+
+. . .
+
+- Signed function: decompose $f$ as $f = f_+ - f_-$, with $f_+ = \max(f, 0)$ and $f_- = \max(-f, 0)$, then
+
+	$$\int f d\mu = \int f_+ d\mu - \int f_- d\mu$$
+
+	When both $\int f_+ d\mu$ and $\int f_- d\mu$ are infinite, $\int f d\mu$ is *undefined*.
+
+---
+
+# Properties of Lebesgue Integral #
+
+- $f \mapsto \int f d\mu$ is a linear functional.
+- If $f = g \ a.e.$ then $\int f d\mu = \int g d\mu$ (Note: a predicate holds *almost everywhere* means that it holds over $\Omega$, except for a null set) 
+- *(Monotonicity)* $f \le g \Rightarrow \int f d\mu \le \int g d\mu$.
+- *(Monotone convergence theorem)* Let $(f_k)$ be a sequence of *non-negative* functions, and $f_k \uparrow f$ pointwisely, then $\int f_k d\mu \uparrow \int f d\mu$.
+- *(Dominated convergence theorem)* If $f_k \rightarrow f$ pointwisely, $(f_k)$ is *dominated* by $g$, *i.e.* $\forall k \ |f_k| \le g$, and $\int g d\mu < \infty$, then $\int f_k d\mu \rightarrow \int f d\mu$.
+
+---
+
+# Examples #
+
+- The *counting measure* over a *finite* or *countable* space $\Omega$ is defined as the *cardinality* of subsets. 
+
+- Let $\mu$ be a *counting measure* over a countable space $\Omega = \{x_k\}$, then 
+
+	$$\int f d\mu = \sum_k f(x_k)$$ 	
+
+. . .
+
+- Let $f$ be a function over $[a, b]$, then when $f$ is *Riemann integrable*, $f$ must be *Lebesgue integrable* (*w.r.t.* the *Lebesgue measure*), and in such a case, the *Lebesgue integral* is equal to the *Riemann integral*. 
+
+. . .
+
+- **Question:** Consider $1_\mathbb{Q}$:
+	- Is it *Riemann integrable*?
+	- Compute the *Lebesgue integral* of $1_\mathbb{Q}$ with respect to the *Lebesgue measure* $\mu$.
+
+---
+
+# $L_P$ Space #
+
 
