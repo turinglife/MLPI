@@ -75,6 +75,9 @@ shorttitle: Lecture 1
 	- *(coincidence axiom)* $d(x, y) = 0 \Leftrightarrow x = y$
 	- *(symmetry)* $d(x, y) = d(y, x), \ \forall x, y \in \Omega$
 	- *(triangle inequality)* $d(x, y) + d(y, z) \ge d(x, z), \ \forall, x, y, z \in \Omega$
+- The *triangle inequality* can be further generalized:
+	
+	$$d(x_1, x_n) \le d(x_1, x_2) + d(x_2, x_3) + \cdots + d(x_{n-1}, x_n).$$	
 - A set $\Omega$ together with a metric $d$ defined thereon is called a *metric space*, denoted by $(\Omega, d)$.
 
 ---
