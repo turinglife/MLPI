@@ -3,6 +3,70 @@ title: Lecture 1 - Metrics and Kernels
 shorttitle: Lecture 1
 ---
 
+# Distances in Machine Learning #
+
+- *Distances* or *similarities* lies at the heart of many learning problems.
+- A lot of models are formulated based on a simple principle
+
+	> Similar inputs should yield similar outputs
+	
+- A classical examples based on this principle is *k-nearest neighbor*.
+
+- Affinity-based regularization:
+
+	$$\sum_{i=1}^n loss(x, f(x; \theta)) + \sum_{i,j} w_{ij} \left(f(x_i; \theta) - f(x_j; \theta)\right)^2$$
+
+	Here, $w_{ij}$ is set to a higher value when $x_i$ and $x_j$ are closer to each other.
+	
+---
+
+# Kernels in Machine Learning #
+
+- Another way to characterize *relations* between samples is to use *kernels*
+- Consider a simple case where samples reside in a vector space $\mathbb{R}^m$. A popular way to make predictions is to use a *linear functional* (with bias), as
+
+	$$f(\mathbf{x}) = \boldsymbol{\theta}^T \mathbf{x} + b$$
+	
+. . .
+
+- What if the samples are not vectors?
+- A natural idea: use a *feature map* $\boldsymbol{\varphi}$ to map the samples to a vector space, then the predictor can be written as
+
+	$$f(\mathbf{x}) = \boldsymbol{\theta}^T \boldsymbol{\varphi}(x) + b$$
+
+---
+
+# Kernels in Machine Learning (cont'd) #
+
+- Given a set of *training samples* $x_1, \ldots, x_n$. In many learning framework, the optimal solution to $\boldsymbol{\theta}$ must be written as a linear combination of *training features*, as
+
+	$$\boldsymbol{\theta} = \sum_{i=1}^n \alpha_i \boldsymbol{\varphi}(x_i)$$
+
+	Then the predictor can be rewritten as
+
+	$$f(\mathbf{x}) = \sum_{i=1}^n \alpha_i \boldsymbol{\varphi}(x_i)^T \boldsymbol{\varphi}(x_j) + b$$
+
+- In practice, you may *directly* compute the dot product of features without explicitly constructing the *feature map*, as
+
+	$$K(x_i, x_j) = \boldsymbol{\varphi}(x_i)^T \boldsymbol{\varphi}(x_j)$$
+
+	This function $K$ is called a *kernel*.  
+
+---
+
+# Big Picture #
+
+- *Metrics* and *kernels* are two most important ways in machine learning to characterize the relations between samples.
+
+- In this lecture, we will elaborate on the theory behind *metrics* and *kernels*, as well as their connections.
+
+
+- In many nontrivial cases, the feature maps would map each sample to a *function* rather than a *finite-dimensional vector*. 
+	- In such cases, we are faced with a question: *how to compute metrics or kernels between functions?*
+	- We are going to explore this in this lecture. 
+
+---
+
 # Metrics #
 
 - Measurement of *distances* or *deviation* lies at the heart of many learning problems.

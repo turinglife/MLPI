@@ -1,5 +1,5 @@
 
-CMD=pandoc -t beamer --template=slide_template.tex
+CMD=pandoc -t beamer --template=slide_template.tex --filter=pdfilter.py 
 
 PRE = slide_template.tex
 
