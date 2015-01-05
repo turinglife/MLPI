@@ -20,7 +20,7 @@ Complete coverage of all these subjects is obviously beyond the scope of this co
 	- *open* and *closed sets*, *continuous function*, and *compact space*
 - Basics of functional analysis: 
 	- *norm*, *inner product*, *Banach space*, *Hilbert space*
-	- *functional*, *operator*, and *spectral theory*
+	- *functional*, *operator*, and *bilinear form*
 - Basics of modern probability theory: 
 	- *measure space*, and *Lebesgue integration*
 	- *random variables*, *expectation*, and *convergence of laws*.
