@@ -35,7 +35,7 @@
 
 ---
 
-# Metrics Defines Topology #
+# Topology Defined by Metrics #
 
 - *Topological space* is a more general concept than *metric space*
     - With *metrics*, *topological concepts* can be defined in a more intuitive way
@@ -201,6 +201,27 @@ Let $S$ be a subset of a complete metric space $(\Omega, d)$:
 - Let $f: S \rightarrow \mathbb{R}$, then $f$ assumes *maximum* and *minimum* within $S$ when $S$ is compact.
 - A *continuous function* is *uniformly continuous* over a compact domain.
 - A *continuously differentiable function* is *Lipschitz continuous* over a compact domain.
+
+---
+
+# Dense Set and Separable Space #
+
+Consider a metric space $\Omega$:
+
+- A subset $S \subset \Omega$ is said to be *dense in $\Omega$*, if $\bar{S} = \Omega$.
+- A subset $S$ is *dense in $\Omega$*, if and only if either of the following holds:
+	- Each open subset of $\Omega$ contains at least one element in $S$.
+	- Each $x \in \Omega$ is a limit of some sequence in $S$.
+- $\mathbb{Q}$ is dense in $\mathbb{R}$, $\mathbb{Q}^n$ is dense in $\mathbb{R}^n$.
+
+. . .
+
+- $\Omega$ is called a *separable space*, if $\Omega$ contains a countable dense subset.
+- Let $f$ be a continuous function on $\Omega$, and $S$ is *dense*, then $f$ is *uniquely* determined by $f|_S$.
+
+. . .
+
+- **Question:** Let $f: \mathbb{R} \rightarrow \mathbb{R}$ be continuous, and it has $f(x + y) = f(x) \cdot f(y)$ and $f(1) = a$. Is $f$ completely determined by these conditions? If so, what is $f$? 
 
 ---
 

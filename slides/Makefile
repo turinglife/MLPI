@@ -13,7 +13,7 @@ lec0_overview.pdf: $(PRE) lec0_overview.md
 	$(CMD) lec0_overview.md -o $@
 
 LEC1_SRC = \
-	lec1_prob.md
+	lec1_topology.md
 
 lec1_math.pdf: $(PRE) $(LEC1_SRC)
 	$(CMD) $(LEC1_SRC) -o $@
