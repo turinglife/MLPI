@@ -333,6 +333,8 @@ $$\int f d\nu = \int f h d\mu, \ \forall f \in L^1(\Omega, \mathcal{S}, \nu)$$
 | integration | expectation |  
 | Radon-Nikodym density of $X_*P$ | probability density |
 
+---
+
 
 
 

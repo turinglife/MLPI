@@ -241,6 +241,8 @@ Consider a function $f: \Omega \rightarrow \Omega$.
 	- *(Prior error estimate):* $d(x_m, x) \le \frac{L^m}{1 - L} d(x_0, x_1)$.
 	- *(Posterior error estimate):* $d(x_m, x) \le \frac{L}{1 - L} d(x_{m-1}, x_m)$.
 
+---
+
 
 
 

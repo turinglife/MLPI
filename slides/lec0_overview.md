@@ -5,17 +5,9 @@ shorttitle: Lecture 0
 
 # About this Course #
 
-- This is a *graduate level* introduction to *statistical learning*. 
-- The course is *not* to teach you:
-	- Support Vector Machine
-	- Linear Regression
-	- ...
-	- Deep Learning
-- Instead, you are going to learn *foundational tools* for developing *your own* models and algorithms.
+- This is a *graduate level* introduction to *advanced statistical learning*. 
 
----
-
-# Course Format #
+. . .
 
 - **No Exams!**
 - Topic driven
@@ -45,9 +37,11 @@ shorttitle: Lecture 0
 
 ---
 
-Please write down five machine learning algorithms that you know
+Please write down five machine learning algorithms that you know.
 
-Don't write *Deep Learning*!
+$\quad$
+
+Don't write *Deep Learning*.
 
 ---
 
@@ -68,6 +62,17 @@ Don't write *Deep Learning*!
 
 ---
 
+# What this Course is About #
+
+- The course is *not* to teach you:
+	- Support Vector Machine
+	- Linear Regression
+	- ...
+	- Deep Learning
+- Instead, you are going to learn *foundational theories and tools* for developing *your own* models and algorithms.
+
+---
+
 # Topics #
 
 - Exponential family distributions and conjugate prior
@@ -81,22 +86,6 @@ Don't write *Deep Learning*!
 - Gaussian Processes and Copula Processes
 - Handling Big Data: Streaming process and Core sets
 
-
-# Math Prerequisites #
-
-- Machine Learning is a subject that involves a lot of math
-	- Especially true when you want to develop your own methods instead of calling something out of box.
-- You should have learned:
-	- Calculus
-	- Linear algebra
-	- (Classical) Probability theory and Statistics
-	- Basic knowledge about Optimization
-- *Are these sufficient?*
-
-
----
-
-Let's take a five-minute break.
 
 
 

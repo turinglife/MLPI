@@ -260,4 +260,6 @@ Let $X$ and $Y$ be normed spaces, and $T: X \rightarrow Y$ be a linear operator:
 	
 - *(Generalized Riesz's theorem)* Let $h$ be a *bounded* bilinear form on $X \times Y$. Then $h$ has a representation as $h(x, y) = \langle Sx, y \rangle$, where $S$ is a bounded linear operator uniquely determined by $h$ and have $\|S\|_{op} = \|h\|$.
 
+---
+
 
