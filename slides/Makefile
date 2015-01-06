@@ -16,8 +16,8 @@ LEC1_SRC = \
 	lec1_math.md \
 	lec1_topology.md \
 	lec1_functional.md \
-	lec1_prob.md
-
+	lec1_prob.md \
+	lec1_convex.md
 
 lec1_math.pdf: $(PRE) $(LEC1_SRC)
-	$(CMD) lec1_functional.md -o $@
+	$(CMD) lec1_prob.md -o $@

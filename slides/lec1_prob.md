@@ -208,6 +208,135 @@ Let $(\Omega, \mathcal{S}, \mu)$ be a measure space:
 
 ---
 
-# $L_P$ Space #
+# $L^p$ space #
+
+Given a measure space $(\Omega, \mathcal{S}, \mu)$:
+
+- For any $p \ge 1$, the $L^p$ space of $\Omega$, denoted by $\mathcal{L}^p(\Omega)$, is the vector space comprised of all *measurable* functions on $\Omega$ such that $\int |f|^p d\mu < \infty$, where the norm is defined by
+
+	$$\|f\|_p \triangleq \left( \int |f|^p d\mu \right)^{1/p}$$
+	
+	Here, $\|\cdot\|_p$ is called the *$L^p$ norm*. 
+	
+- **Question:** Is $\|\cdot\|_p$ actually a *norm*?
+
+. . .
+
+- Functions that are equal *almost everywhere* are indistinguishable by integration. Let $L^p(\Omega)$ denotes the vector space with all *essentially equivalent* functions merged into an element. Then $L^p$ is a normed vector space with the $L^p$.
+
+---
+
+# $L^p$ space (cont'd) #
+
+- What about when $p = \infty$ ?
+
+. . .
+
+- The $L^\infty$ norm is defined as the *essential supreme* of $|f|$, as
+
+	$$\|f\|_\infty = \inf \left\{c: |f(x)| \le c, \ a.e.\right\}$$
+
+
+- For any $p \in [1, +\infty]$, $L^p$ is complete, implying that $L^p$ is a Banach space.
+
+- The dual space of $L^p$ is isomorphic to $L^q$ with $p^{-1} + q^{-1} = 1$. For each bounded functional on $h \in L^p$, there exists $g \in L^q$, such that 
+
+	$$h(f) = \int f g d\mu, \ \forall f \in L^p$$
+
+. . .
+
+- $L^2$ is a Hilbert space, where the inner product is defined as
+
+	$$\langle f, g \rangle \triangleq \int f g d\mu$$
+
+---
+
+# Absolute Continuity #
+
+Let $\mu$ and $\nu$ be two measures over a measurable space $(\Omega, \mathcal{S})$
+
+- $\nu$ is said to be *absolutely continuous* with respect to $\mu$, denoted by $\nu \prec \mu$, if $\nu(A) = 0$ whenever $\mu(A) = 0$.
+
+- $\mu$ and $\nu$ are said to be *singular*, denoted by $\mu \perp \nu$, if there exists $A \in \mathcal{S}$ such that $\mu(A) = 0$ and $\nu(\Omega \backslash A) = 0$.
+
+- *(Lebesgue Decomposition)* there exists a unique decomposition of $\nu$ as $\nu = \nu_{ac} + \nu_{s}$ such that $\nu_{ac} \prec \mu$ and $\nu_s \perp \mu$.
+
+---
+
+# Radon-Nikodym #
+
+*(Radon-Nikodym theorem)* Let $\nu$ be a finite measure that is *absolutely continuous* with respect to $\mu$. Then there exists an *essentially* unique $h \in L^1(\Omega, \mathcal{S}, \mu)$ such that 
+
+$$\nu(A) = \int_A h d\mu, \ \forall A \in \mathcal{S}$$
+	
+Here, $\nu$ is called the *Radon-Nikodym density* of $\nu$ with respect to $\mu$. In this case, we also have
+	
+$$\int f d\nu = \int f h d\mu, \ \forall f \in L^1(\Omega, \mathcal{S}, \nu)$$
+	
+---
+
+# Probability Measure #
+
+- A *probability measure* $P$ is a measure on $(\Omega, \mathcal{S})$ with $P(\Omega) = 1$.
+- The $\sigma$-algebra $\mathcal{S}$ can be interpreted as an *event space*:
+	- Each element $A \in \mathcal{S}$, which is a subset of $\Omega$, can be considered as an *event*.
+	- $A \cap B$ means *both $A$ and $B$ happen
+	- $A \cup B$ means either $A$ or $B$ happens
+	- $A^c$ means $A$ does not happen
+	- $A \cap B = \emptyset$ means that $A$ and $B$ are *mutually exclusive*.
+- $P(A)$ can be considered as the *probability* of the event $A$.
+- Obviously, $P$ satisfies all the requirement of probability functions in classical probability theory.
+
+. . .
+
+- Two events $A$ and $B$ are said to be *independent* if $P(A \cap B) = P(A) P(B)$.
+- We say two collections of events $\mathcal{A}$ and $\mathcal{B}$ are *independent* when $P(A \cap B) = P(A)P(B) \ \forall A \in \mathcal{A}, B \in \mathcal{B}$.
+
+---
+
+# Random Variables #
+
+- A *(real-valued) random variable* $X$ is defined to be a *measurable function* $X: \Omega \rightarrow \mathbb{R}$, meaning that for any Borel set $A \in \mathcal{B}(R)$, $X^{-1}(A)$ is measurable, *i.e.* $X^{-1}(A) \in \mathcal{S}$.
+
+- The *expectation* of a random variable $X$ is defined to be
+	
+	$$E[X] = \int X dP$$ 
+
+- The *expectation* is a *bounded linear functional*.
+
+. . .
+
+- Each random variable $X$ induces a sub-$\sigma$-algebra, denoted by $X^{-1}(\mathcal{B})$, where $\mathcal{B}$ is the Borel $\sigma$-algebra on $\mathbb{R}$.
+
+- Two random variables $X$ and $Y$ are said to be *independent* if $X^{-1}(\mathcal{B})$ and $Y^{-1}(\mathcal{B})$ are independent.
+
+---
+
+# Probability Density #
+
+- The probability that the value of $X$ falling in $A$ is then given by $P(X^{-1}(A))$. 
+	- The function $P \circ X^{-1}$ that maps each Borel set $A \subset \mathbb{R}$ to a *probability value* itself is a *probability measure* over $\mathbb{R}$, which is called the *law* of $X$, denoted by $X_*P$.
+
+- The Radon-Nikodym density of $X_*P$ with respect to the Lebesgue measure over $\mathbb{R}$, denoted by $f$, is called the *probability density* of $X$. So we have $f d\mu = d X_*P$.
+ 
+---
+
+# (Semantic) Correspondence #
+
+| **measure theory** | **probability theory** |  
+|  ------	| ------	|  
+| $\sigma$-algebra | event space |  
+| sub-$\sigma$-algebra | a family of events |
+| measure $P$ | probability function |    
+| measurable function $X$ | random variable |  
+| $X_*P$ | law of $X$ |
+| integration | expectation |  
+| Radon-Nikodym density of $X_*P$ | probability density |
+
+
+
+
+
+
 
 
