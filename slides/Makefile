@@ -19,7 +19,8 @@ LEC1_SRC = \
 	lec1_prob.md \
 	lec1_convex.md
 
-lec1_math.pdf: $(PRE) $(LEC1_SRC)
+lec1.md: $(LEC1_SRC)
 	cat $(LEC1_SRC) > lec1.md
+
+lec1_math.pdf: $(PRE) lec1.md
 	$(CMD) lec1.md -o $@
-	rm lec1.md
