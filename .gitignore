@@ -1,7 +1,7 @@
 ## generated pdf
 
-lec*.pdf
-
+lectures/notes
+lectures/slides
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
