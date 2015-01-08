@@ -27,7 +27,12 @@ This course is going to cover several topics. For each topic, we will have lectu
 
 *This sounds like a lot of stuff. Fortunately, you don’t have to memorize everything. Our goal is to provide you with an arsenal, from which you may find a weapon or two that are useful for you to tackle your problems.*
 
+---
 
+## Course Materials
+
+- Lecture notes and homework are posted on Piazza (Course Code: *IERG 6130*)
+- Most course materials were prepared using [Pandoc's Markdown](http://johnmacfarlane.net/pandoc/README.html#pandocs-markdown), and are compiled into presentation slides and/or handout notes.
 
 
 
