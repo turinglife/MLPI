@@ -33,6 +33,6 @@ This course is going to cover several topics. For each topic, we will have lectu
 
 - Lecture notes and homework are posted on Piazza (Course Code: *IERG 6130*)
 - Most course materials were prepared using [Pandoc's Markdown](http://johnmacfarlane.net/pandoc/README.html#pandocs-markdown), and are compiled into presentation slides and/or handout notes.
-- The generated slides are also published on [Slideshare](http://www.slideshare.net/lindahua2015).
+- The generated slides are also published on [Slideshare](http://www.slideshare.net/lindahua2015/presentations).
 
 
