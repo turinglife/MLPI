@@ -1,6 +1,7 @@
 ## generated pdf
 
-.created
+.doit.db.db
+*.pyc
 lectures/notes
 lectures/slides
 
