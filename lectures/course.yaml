@@ -14,3 +14,8 @@ lectures:
         - prob
         - convex
 
+    - pre: lec2
+      name: montecarlo
+      src:
+        - montecarlo
+
