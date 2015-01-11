@@ -310,6 +310,52 @@ Consider an ergodic Markov chain on a finite space $\Omega$ with transition prob
 
 	$$\frac{1}{2} \Phi_*^2 \le \gamma \le 2 \Phi_*.$$
 
+---
+
+# Exercise 1 #
+
+Consider an ergodic finite chain $P$ with $\gamma_* < \gamma$. To improve the mixing time, one can add a little bit lazyness as $P' = (1 - \alpha) P + \alpha I$. Please solve the optimal value of $\alpha$ that maximizes the *absolute spectral gap* $\gamma_*$.
+
+---
+
+# Exercise 2 #
+
+Consider a $2 \times 2$ stochastic matrix $P$, given by $P(x, y) = 1 - p$ when $x \ne y$.
+
+- Please specify the condition under which $P$ is ergodic.
+
+- What is the equilibrium distribution when $P$ is ergodic?
+
+. . .
+
+- Solve the optimal value of $p$ that maximizes the absolute spectral gap.
+
+---
+
+# Exercise 3 #
+
+- Consider a random walk on a circle of length $n$. At each state $x$, it walks to either of its neighbor with probability $p$, and stays at $x$ with probability $1 - 2p$.
+
+- Please specify the condition under which $P$ is ergodic.
+
+- What is the equilibrium distribution when $P$ is ergodic?
+
+. . .
+
+- Solve the optimal value of $p$ that maximizes the absolute spectral gap.
+
+. . .
+
+- If $n$ is even, and we allow the chain to jump from $x$ to its *opposite* state with probability $q$ and thus the probability of staying at $x$ is $1 - 2p - q$. When's the absolute spectral gap?
+
+- Solve the optimal setting of $p$ and $q$.
+
+---
+
+
+
+
+
 
 
 
