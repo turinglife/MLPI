@@ -18,4 +18,5 @@ lectures:
       name: montecarlo
       src:
         - montecarlo
+        - markov
 

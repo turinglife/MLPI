@@ -212,19 +212,29 @@ Let $p$ be the *probability mass function* over $\{1, \ldots, K\}$. Please desig
 - Basic idea -- *Learn* to do sampling
 	- choose the proposal from a tractable family: $q(x; \theta)$.
 
+. . .
+
 - Objective: minimize the sample mean of $f^2(x) w^2(x; \theta)$. Update the parameter $\theta$ as:
 	
-	$$\theta_{t+1} \leftarrow \theta_t - \alpha \frac{1}{N} \sum_{i=1}^N f^2(x_i) w(x_i; \theta_t) \nabla_\theta w(x_i, \theta_t).$$
+	$$\theta_{t+1} \leftarrow \theta_t - \alpha \frac{1}{N} \sum_{i=1}^N f^2(x_i) w(x_i; \theta_t) \nabla_\theta w(x_i, \theta_t)$$
+
+	with $x_1, \ldots, x_N \sim q(x; \theta_t)$.
 
 ---
 
-# Normalized Weights #
+# Self-Normalized Weights #
 
+- In many practical cases, $w(x) \propto p(x) / q(x)$ is known only upto a normalizing constant. For such case, we can write:
 
+	$$E_p[f] = \frac{\int f(x) w(x) q(x) \mu(dx)}{\int w(x) q(x) \mu(dx)}.$$
 
+- Hence, we may approximate $E_p[f]$ with
 
+	$$\tilde{I}_{q,n}(f) = \frac{1}{n} \sum_{i=1}^n \tilde{w}_i f(x_i)$$
 
+	Here, $\tilde{w}_i$ is called the *self-normalized weight$, given by $\tilde{w}_i = \frac{w(x_i)}{\sum_{i=1}^n w(x_i)}.$
 
+- By strong law of large numbers, we have $\tilde{I}_{q,n}(f) \xrightarrow{a.s.} E_p[f]$ as $n \rightarrow \infty$.
 
-
+---
 
