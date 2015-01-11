@@ -256,41 +256,39 @@ There are various ways to bound the mixing time, taking into account different f
 
 ---
 
-# Spectral Representation of a Stochastic Matrix #
+# Spectral Representation #
 
-Let $P$ be a *stochastic matrix* over a finite space $\Omega$:
+Let $P$ be a *stochastic matrix* over a finite space $\Omega$ with $|\Omega| = N$:
 
-- Let $\lambda$ be an eigenvalue of $P$ then $|\lambda| \le 1$.
-- If $P$ is irreducible, then $P 1 = 1$.
-- If $P$ is irreducible and aperiodic, then the minimum eigenvalue is greater than $-1$.  
+- The *spectral radius* of $P$, namely the maximum absolute value of all eigenvalues, is $\rho(P) = 1$. 
 
 . . .
 
-Furthermore, if $\pi$ is in *detailed balance* *w.r.t.* $P$:
+Furthermore, if $P$ is *ergodic* and *reversible* with equilibrium distribution $\pi$:
 
-- The inner product space $(\mathbb{R}^{\Omega}, \langle \cdot, \cdot \rangle_\pi)$ has an orthonormal basis of real-valued functions $(f_i)_{i=1}^{|\Omega|}$ with real eigenvalues $(\lambda_i)$, that is, $P f_i = \lambda_i f_i$, and $\langle f_i, f_j \rangle_\pi \triangleq \sum_{x \in \Omega} f_i(x) f_j(x) \pi(x) = \delta_{ij}$.
+- Consider an inner product space $\left(\mathbb{R}^{\Omega}, \langle \cdot, \cdot \rangle_\pi\right)$ with 
 
-- The matrix $P^t$ can be decomposed as:
+	$$\langle f, g \rangle_\pi \triangleq E_\pi[f(x) g(x)] = \sum_{x \in \Omega} \pi(x) f(x) g(x).$$
 
-	$$\frac{P^t(x, y)}{\pi(y)} = \sum_{i=1}^{|\Omega|} f_i(x) f_i(y) \lambda_i^t = 1 + \sum_{i=2}^{|\Omega|} f_i(x) f_i(y) \lambda_i^t.$$
+- All eigenvalues of $P$ are real values, given by $1 = \lambda_1 > \lambda_2 \ge \cdots \ge \lambda_N > -1$. Let $f_i$ be the right eigenvector associated with $\lambda_i$. Then the left eigenvector is $\pi_i \circ f_i$ *(element-wise product), and $P^t$ can be represented as 
+
+	$$\frac{P^t(x, y)}{\pi(y)} = \sum_{i=1}^{N} f_i(x) f_i(y) \lambda_i^t = 1 + \sum_{i=2}^{N} f_i(x) f_i(y) \lambda_i^t.$$
 
 ---
 
-# Spectral Gap #
+# Spectral Gap and Relaxation Time #
 
-For a reversible transition matrix $P$, we arrange the eigenvalues in decreasing order as
+- Let $\lambda_* \triangleq \sup \left\{|\lambda_i|: 2 \le i \le |\Omega|\right\}$. Then the *spectral gap* is defined to be $\gamma \triangleq 1 - \lambda_2$ and the *absolute spectral gap* is defined to be $\gamma_* \triangleq 1 - \lambda_*$. Then:
 
-$$1 = \lambda_1 > \lambda_2 \ge \cdots \ge \lambda_{|\Omega|} \ge -1.$$
-
-- Let $\lambda_* \triangleq \sup \left\{|\lambda_i|: 2 \le i \le |\Omega|\right\}$. Then the *spectral gap* is defined to be $\gamma \triangleq 1 - \lambda_2$ and the *absolute spectral gap* is defined to be $\gamma_* \triangleq 1 - \lambda_*$. 
-
-- If the chain is ergodic, then the *absolute spectral gap* is positive. If the chain is *lazy*, $\gamma = \gamma_*$.
-
-- The *mixing time* can be upper bounded based on the *relaxation time* as:
-
-	$$t_{mix}(\epsilon) \le \log \left( \frac{1}{\epsilon \pi_{min}} \right) \frac{1}{\gamma_*}.$$
+	$$\left|\frac{P^t(x, y)}{\pi(y)} - 1 \right| \le \frac{\lambda_*^t}{\sqrt{\pi(x) \pi(y)}} \le \frac{\lambda_*^t}{\pi_{min}} \le \frac{e^{-\gamma_* t}}{\pi_{min}}.$$
 	
 	Here, $\pi_{min} = \min_{x \in \Omega} \pi(x)$.
+
+- The *relaxation time* of a *Markov chain* is defined to be $t_{rel} = 1 / \gamma_*$, then
+
+	$$\log \left( \frac{1}{2\epsilon} \right) (t_{rel} - 1) \le t_{mix}(\epsilon) \le \log \left( \frac{1}{\epsilon \pi_{min}} \right) t_{rel}.$$
+
+- Generally, the goal to design a *rapidly mixing* reversible Markov chain is to minimize $\lambda_*$, or in other words, maximize the $\gamma_*$.
 
 ---
 
@@ -302,21 +300,19 @@ Consider an ergodic Markov chain on a finite space $\Omega$ with transition prob
 
 	$$Q(A, B) \triangleq \sum_{x \in A, y \in B} \pi(x) P(x, y).$$
 
-- The *conductance* of a proper subset $S$ is defined as
-
-	$$\Phi(S) \triangleq \frac{Q(S, S^c)}{\pi(S)}.$$
+- The *conductance* of a Markov chain is defined as
 	
-	The *conductance* of the entire chain is defined as
-	
-	$$\Phi_* = \inf_{S: \pi(S) \le \frac{1}{2}} \Phi(S).$$
+	$$\Phi_* = \inf_{S: \pi(S) \le \frac{1}{2}} \frac{Q(S, S^c)}{\pi(S)}.$$
 
----
-
-# Conductance (cont'd) #
+. . .
 
 - *(Jerrum and Sinclair (1989))* The spectral gap is bounded by
 
 	$$\frac{1}{2} \Phi_*^2 \le \gamma \le 2 \Phi_*.$$
+
+
+
+
 
 
 	
