@@ -334,7 +334,7 @@ Consider a $2 \times 2$ stochastic matrix $P$, given by $P(x, y) = 1 - p$ when $
 
 # Exercise 3 #
 
-- Consider a random walk on a circle of length $n$. At each state $x$, it walks to either of its neighbor with probability $p$, and stays at $x$ with probability $1 - 2p$.
+- Consider a random walk on a circle of length $n$, where $n$ is even. At each state $x$, it walks to either of its neighbor with probability $p$, and stays at $x$ with probability $1 - 2p$.
 
 - Please specify the condition under which $P$ is ergodic.
 
@@ -342,11 +342,11 @@ Consider a $2 \times 2$ stochastic matrix $P$, given by $P(x, y) = 1 - p$ when $
 
 . . .
 
-- Solve the optimal value of $p$ that maximizes the absolute spectral gap.
+- Solve the optimal value of $p$ that maximizes the *conductance*.
 
 . . .
 
-- If $n$ is even, and we allow the chain to jump from $x$ to its *opposite* state with probability $q$ and thus the probability of staying at $x$ is $1 - 2p - q$. When's the absolute spectral gap?
+- If we allow the chain to jump from $x$ to its *opposite* state with probability $q$ and thus the probability of staying at $x$ is $1 - 2p - q$. What's the conductance now?
 
 - Solve the optimal setting of $p$ and $q$.
 
