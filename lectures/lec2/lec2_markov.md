@@ -98,15 +98,15 @@
 
 - Suppose the chain is initially at state $x$, the *first return time* to state $x$ is defined to be 
 
-	$$T_x = \inf\left\{ t \ge 1: X_t = x | X_0 = x \right\}.$$ 
+	$$\tau_x = \inf\left\{ t \ge 1: X_t = x | X_0 = x \right\}.$$ 
 
-	``Note that $T_x$ is a random variable.
+	Note that $\tau_x$ is a random variable.
 
-- We also define $f_{xx}^{(n)} = \mathrm{Pr}(T_x = n)$, the probability that the chain returns to $x$ *for the first time* after $n$ steps.  
+- We also define $f_{xx}^{(n)} = \mathrm{Pr}(\tau_x = n)$, the probability that the chain returns to $x$ *for the first time* after $n$ steps.  
 
 - A state $x$ is said to be *recurrent* if it is guaranteed to have a *finite hitting time*, as 
 
-	$$\mathrm{Pr}(T_x < \infty) = \sum_{n=1}^\infty f_{xx}^{(n)} = 1.$$
+	$$\mathrm{Pr}(\tau_x < \infty) = \sum_{n=1}^\infty f_{xx}^{(n)} = 1.$$
 
 	Otherwise, $x$ is said to be *transient*.
 
@@ -347,11 +347,11 @@ Next, we extend the formulation of *Markov chain* from *countable space* to gene
 
 . . .
 
-- Generally, a *homogeneous Markov chain* over a measurable space $(\Omega, \mathcal{S})$ is characterized by an *initial measure* $\pi_0$ and a *stochastic kernel* $P: \Omega \times \mathcal{S} \rightarrow [0, 1]$, denoted by $Markov(\pi_0, P)$.  Here, $\Omega$ is called the *state space*; and:
+- Generally, a *homogeneous Markov chain* over a measurable space $(\Omega, \mathcal{S})$ is characterized by an *initial measure* $\pi_0$ and a *transition probability kernel* $P: \Omega \times \mathcal{S} \rightarrow [0, 1]$, denoted by $Markov(\pi_0, P)$.  Here, $\Omega$ is called the *state space*; and:
 
 	$$\mathrm{Pr}(X_{t+1} \in A | X_t = x) = P(x, A).$$
 	
-- The *stochastic kernel* $P$ has to satisfy:
+- $P$ must be a *stochastic kernel*:
 	- Given $x \in \Omega$, $P_x: A \mapsto P(x, A)$ is a *probability measure* over $(\Omega, \mathcal{S})$.
 	- Given a measurable subset $A \in \mathcal{S}$, $P(\cdot, A): x \mapsto P(x, A)$ is a measurable function. 
 
@@ -371,7 +371,7 @@ Next, we extend the formulation of *Markov chain* from *countable space* to gene
 
 	$$(Q \circ P)(x, A) = \int_\Omega P(x, dy) Q(y, A).$$
 
-- Recursive composition of $P$ for $m$ times results in a stochastic kernel denoted by $P^m$, and we have $\mu_{t+m} = \mu_t P^m$.
+- Recursive composition of $P$ for $m$ times results in a stochastic kernel denoted by $P^m$, and we have $P^{n+m} = P^n \circ P^m$ and $\mu_{t+m} = \mu_t P^m$.
 
 ---
 
@@ -383,42 +383,180 @@ $$X_{t+1} = X_t + B_t, \ \text{ with } B_t \sim \mathcal{N}(0, \sigma^2 I).$$
 
 ---
 
-# Irreducibility #
+# Occupation Time, Return Time, and Hitting Time #
 
-- Let $\mu$ be a positive measure over $(\Omega, \mathcal{S})$. A *stochastic kernel* $P$ is called *$\mu$-irreducible* if for each $x \in \Omega$ and $A \in \mathcal{S}$ with $\mu(A) > 0$, there exists a positive integer $n$ such that $P^n(x, A) > 0$. 
+For general space, talking about the probability of *hitting a point* makes no sense. Instead, we should talk about sets:
 
 . . .
 
-- For typical spaces, we usually choose the *canonical base measure* as $\mu$. 
-	- For *countable space*, we use *counting measure* as $\mu$
-	- For $\mathbb{R}$, $\mathbb{R}^n$ or manifolds, we use *Lebesgue measure* as $\mu$.
-	- When $\mu$ is implicitly indicated by the context, we simply call a kernel $P$ *irreducible*.
-	- When $\Omega$ is countable, this notion is *irreducibility* coincides with the one introduced earlier.
+Given a Markov train $(X_t)$ over $(\Omega, \mathcal{S})$, and $A \in \mathcal{S}$:
+
+- The *occupation time* of $A$ is defined to be $\eta_A \triangleq \sum_{t=1}^\infty 1(X_t \in A)$. 
+- The *return time* of $A$ is defined to be $\tau_A \triangleq \inf \left\{ t \ge 1: X_t \in A \right\}$.
+- The *hitting time* of $A$ is defined to be $\sigma_A \triangleq \inf \left\{ t \ge 0: X_t \in A \right\}$. 
+- $\eta_A$, $\tau_A$ and $\sigma_A$ are all random variables. 
 
 ---
 
-# Irreducibility (cont'd) #
-	
-The following theorem provides an easier way to verify *irreducibility*.
+# $\varphi$-irreducibility #
 
-- A measurable subset $A \in \mathcal{S}$ with $\mu(A) > 0$ is called *$\mu$-communicating* if for each $x \in A$ and each $B \in \mathcal{S}$ that is contained in $A$, there exists a positive integer $n > 0$ such that $P^n(x, B) > 0$. 
-	- $P$ is irreducible if and only if $\Omega$ is *$\mu$-communicating*. 
+- Define $L(x, A) \triangleq P_x(\tau_A < \infty) = P_x(X \text{ ever enters } A)$.
+
+- $L(x, A)$ has
+
+	$$L(x, A) = P(x, A) + \int_{A^c} P(x, dy) L(y, A).$$
+
+- Given a positive measure $\varphi$ over $(\Omega, \mathcal{S})$, a markov chain is called *$\varphi$-irreducible* if $L(x, A) > 0 \ \forall x \in \Omega$ whenever $A$ is *$\varphi$-positive*, *i.e.* $\varphi(A) > 0$. 
+
+- Intuitively, it means that for any $\varphi$-positive set $A$, there is positive chance that the chain enters $A$ within finite time, no matter where it begins.
+
+---
+
+# $\varphi$-irreducibility (cont'd) # 
+
+- A Markov chain over $\Omega$ is $\varphi$-irreducible if and only if either of the following statement holds:
+	- $\varphi(A) > 0 \Rightarrow \forall x \in \Omega, \ E_x(\eta_A) > 0$
+	- $\varphi(A) > 0 \Rightarrow \forall x \in \Omega, \ \exists t \in \mathbb{N}^+, \ P^t(x, A) > 0$
+
+. . .
+
+- Typical spaces usually come with *natural measure* $\varphi$:
+	- The *natural measure* for countable space is the *counting measure*. In this case, the notion of $varphi$-irreducibility coincides with the one introduced earlier.
+	- The *natural measure* for $\mathbb{R}$, $\mathbb{R}^n$, or a finite-dimensional manifold is the *Lebesgue measure*
+	- When $\varphi$ is implicitly indicated, we simple call the chain *irreducible*.
+
+---
+
+# $\varphi$-irreducibility (cont'd) #
+
+The following theorem provides an easier way to verify *irreducibility* for separable space.
+
+- A set $S$ is called *$\varphi$-communicating* if for every $x \in S$ and every $\varphi$-positive subset $A \subset S$ (*i.e.* $A$ is measurable and $\varphi(A) > 0$), $x \rightarrow A$.
+	- The space $\Omega$ is *$\varphi$-irreducible* if and only if $\Omega$ is *$\varphi$-communicating*. 
 
 . . .
 
 - *(Irreducibility Theorem)* Let $P$ be a *stochastic kernel* over a *measurable* state space $(\Omega, \mathcal{S})$, then $P$ is *$\mu$-irreducible* if the following conditions are satisfied:
 	- $\Omega$ is *separable* (meaning $\Omega$ has a countable dense set) and *connected*;
-	- Every non-empty open subset $A$ of $\Omega$ has $\mu(A) > 0$;
-	- Every $x \in \Omega$ has a $\mu$-communicating neighborhood.
+	- Every non-empty open subset $A$ is $\varphi$-positive;
+	- Every $x \in \Omega$ has a $\varphi$-communicating neighborhood.
 
 . . .
 
 - **Note:** This irreducibility theorem does *NOT* apply to countable space. Why?
 
+--- 
+
+# Transience and Recurrence #
+
+Given a Markov chain $(X_t)$ over $(\Omega, S)$, and $A \in \mathcal{S}$:
+
+- $A$ is called *transient* if $E_x[\eta_A] < \infty$ for every $x \in A$.
+- $A$ is called *uniformly transient* if there exists $M > 0$ such that $U(x, A) < M$ for every $x \in A$.
+- $A$ is called *recurrent* if $E_x[\eta_A] = \infty$ for every $x \in A$.
+
+. . .
+
+- Consider an $\varphi$-irreducible chain, then either:
+	- Every $\varphi$-positive subset is recurrent, then we call the chain *recurrent*
+	- $\Omega$ is covered by countably many uniformly transient sets, then we call the chain *transient*.
+
 ---
 
+# Harris Recurrence #
 
+- A set $A$ is called *Harris recurrent* if 
 
+	$$P_x(\eta_A = \infty) = 1, \ \forall x \in A,$$
+	
+	which means any chain starts within $A$ visits $A$ infinitely often.
+
+- A Markov chain is called *Harris recurrent* if it is $\varphi$-irreducible (with maximal irreducibility measure) and every $\varphi$-positive subset is Harris recurrent.
+
+- Most MCMC samplers are *Harris recurrent*.
+
+. . .
+
+- *Harris recurrence* implies *recurrence*.
+	- Note: $P_x(\eta_A = \infty) = 1 \Rightarrow E_x[\eta_A] = \infty$, but the converse is generally not true. 
+
+---
+
+# Invariant Measures #
+
+- A measure $\pi$ is called an *invariant measure* *w.r.t.* the stochastic kernel $P$ if $\pi = \pi P$, *i.e.*
+
+	$$\pi(A) = \int_\Omega \pi(dx) P(x, A), \ \forall A \in \mathcal{S}.$$
+
+- A *recurrent* Markov chain admits a unique *invariant measure* $\pi$ (up to a scale constant). 
+	- **Note:** This measure $\pi$ can be finite or infinite.
+
+---
+
+# Positive Chains #
+
+- A Markov chain is called *positive* if it is irreducible and admits an *invariant probability measure* $\pi$.
+	
+- If a Markov chain is *positive* then it is *recurrent*, and thus it admits a *unique* invariant probability measure. 
+
+- If a Markov chain is *Harris positive* and *recurrent*, then it is called a *positive Harris chain*.
+
+. . .
+
+- The study of the *existence* of $\pi$ requires more sophisticated analysis that involves *petite sets*, *sub-invariance*, and *atoms*. 
+	- We are not going into these details, as in MCMC practice, existence of $\pi$ is usually not an issue.
+
+---
+
+# Subsampled Chains #
+
+Suppose $P$ is a stochastic kernel and $q$ is a probability vector over $\mathbb{N}$.
+
+- Then $P_q$ defined as below is also a stochastic kernel:
+
+	$$P_q(x, A) = \sum_{k=0}^\infty q_k P^k(x, A)$$
+	
+	The chain with kernel $P_q$ is called a *subsampled chain* with $q$.
+	
+- When $q_n = 1(n = m)$, $P_q = P^m$.
+
+- If $\pi$ is invariant *w.r.t.* $P$, then $\pi$ is also invariant *w.r.t.* $P_q$.
+
+---
+
+# Birkhoff Ergodic Theorem #
+
+- A stochastic process $(X_t)$ is called a *stationary process* if 
+
+	$$P(X_{t_1+\tau}, \ldots, X_{t_k+\tau}) = P(X_{t_1}, \ldots, X_{t_k})$$
+	
+- A Markov chain is *stationary* if it has an invariant probability measure and that is also its initial distribution.
+
+- *(Birkhoff Ergodic Theorem)* Every *irreducible stationary* Markov chain $(X_t)$ is *ergodic*, that is, for any real-valued measurable function $f$:
+
+	$$\frac{1}{n} \sum_{i=1}^n f(X_i) \xrightarrow{a.s.} E_\pi[f(X)], \ \text{ as } n \rightarrow \infty.$$
+	
+	where $\pi$ is the invariant probability measure.
+
+- If $Markov(\pi, P)$ is a stationary Markov chain, then $Markov(\pi, P_q)$ is also a stationary Markov chain.
+
+---
+
+# Convergence of Measures #
+
+- For a *positive Harris chain* $Markov(\pi_0, P)$ with invariant probability measure $\pi_*$, and $\pi_t = \pi_0 P^t$, we have
+
+	$$\|\pi_t - \pi_*\|_{TV} \rightarrow 0, \ \text{ as } t \rightarrow \infty.$$
+	
+- As an immediate corollary, we have
+
+	$$\|P^t(x, \cdot) - \pi_*\|_{TV} \rightarrow 0, \ \text{ as } t \rightarrow \infty.$$
+
+. . .
+
+- The chain is called *geometric ergodic* if there exist a nonnegative function $M$ and $\rho \in (0, 1)$ such that
+
+	$$\|P^t(x, \cdot) - \pi_*\| \le M(x) \rho^t, \ \forall x \in \Omega.$$
 	
 
 
