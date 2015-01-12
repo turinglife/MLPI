@@ -19,4 +19,5 @@ lectures:
       src:
         - montecarlo
         - markov
+        - mcmc
 

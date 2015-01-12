@@ -137,24 +137,6 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 
 ---
 
-# Detailed and Reversible Markov Chains #
-
-- A distribution $\pi$ is said to be *in detailed balance* with $P$ if $\pi(x) P(x, y) = \pi(y) P(y, x)$. 
-	- *Detailed balance* implies *invariance*.
-	- The converse is not true. 
-
-. . .
-
-- An irreducible Markov chain with TPM $P$ and an invariant distribution $\pi$ is called *reversible* if $\pi$ is in *detailed balance* with $P$. 
-
-- Consider an irreducible Markov chain $(X_t)$ $Markov(\pi, P)$ where $\pi$ is in *detailed balance* with $P$, its *reversal* $(\hat{X}_t)$ is given by $(\pi, \hat{P})$ with $\hat{P}(x, y) \triangleq \pi(y) P(y, x) / \pi(x)$. Then
-
-	$$\Pr(X_0 = x_0, \ldots, X_n = x_n) = \Pr(\hat{X}_0 = x_n, \ldots, \hat{X}_n = x_0).$$
-
-- Reversible chains are widely used in MCMC practice.
-
----
-
 # Positive Recurrence #
 
 - The *expected return time* of a state $x$ is defined to be $m_x \triangleq E[T_x]$.
@@ -558,6 +540,6 @@ Suppose $P$ is a stochastic kernel and $q$ is a probability vector over $\mathbb
 
 	$$\|P^t(x, \cdot) - \pi_*\| \le M(x) \rho^t, \ \forall x \in \Omega.$$
 	
-
+---
 
 
