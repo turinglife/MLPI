@@ -76,6 +76,17 @@
 
 ---
 
+# Exercise #
+
+\begin{center}
+\includegraphics[width=0.35\textwidth]{imgs/communicateclass.png}
+\end{center}
+
+- Is this Markov chain *irreducible* ?
+- Please identify the *communicating classes*.
+
+---
+
 # Periodicity of Markov Chains #
 
 - The *period* of a state $x$ is defined as 
@@ -137,6 +148,18 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 
 ---
 
+# Exercise #
+
+\begin{center}
+\includegraphics[width=0.45\textwidth]{imgs/mchain2.png}
+\end{center}
+
+- Is this chain *irreducible*? 
+- Is this chain *periodic*?
+- Please compute the *invariant distribution*.
+
+---
+
 # Positive Recurrence #
 
 - The *expected return time* of a state $x$ is defined to be $m_x \triangleq E[T_x]$.
@@ -148,6 +171,17 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 . . .
 
 - *(Existence of Invariant distributions)* For an *irreducible* Markov chain, if some state is *positive recurrent*, then all states are *positive recurrent* and the chain has an *invariance distribution* $\pi$ given by $\pi(x) = 1 / m_x$. 
+
+---
+
+# Exercise: 1D Random Walk #
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{imgs/rwalk1d.png}
+\end{center}
+
+- Under what condition is this chain *recurrent*?
+- When it is *recurrent*, is it *positive recurrent* or *null recurrent*?
 
 ---
 
@@ -196,31 +230,6 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 . . .
 
 - The time required by a Markov chain to get close to the equilibrium distribution is measured by the *mixing time*, defined as $t_{mix}(\epsilon) = \inf\{t: d(t) \le \epsilon\}$, and in particular $t_{mix} \triangleq t_{mix}(1/4)$.
-
----
-
-# Bounds of Mixing Time #
-
-There are various ways to bound the mixing time, taking into account different factors:
-
-- Counting Bound
-- Diameter Bound
-- Spectral Analysis
-- Conductance
-
----
-
-# Simple Bounds on Mixing Time #
-
-- *(Counting Bound)*: if the chain can only transit to a limited number of states from each state, it may take quite a long time to cover the explore the entire space. Consider an ergodic finite Markov chain over $\Omega$ whose equilibrium distribution is uniform, then
-
-	$$t_{mix}(\epsilon) \ge \frac{\log\left(|\Omega|(1 - \epsilon)\right)}{\log \Delta}.$$
-
-	Here, $\Delta$ is the maximum outgoing degree of each state.
-	
-. . .
-
-- *(Diameter Bound)*: For an ergodic finite Markov chain, we have $t_{mix}(\epsilon) \ge L / 2$ for any $\epsilon < 1 / 2$, where $L$ is the *diameter* of the state graph.
 
 ---
 
@@ -277,6 +286,14 @@ Consider an ergodic Markov chain on a finite space $\Omega$ with transition prob
 - *(Jerrum and Sinclair (1989))* The spectral gap is bounded by
 
 	$$\frac{1}{2} \Phi_*^2 \le \gamma \le 2 \Phi_*.$$
+
+---
+
+# Conductance (Illustration) #
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{imgs/mcbottleneck.png}
+\end{center}
 
 ---
 
@@ -362,6 +379,10 @@ Next, we extend the formulation of *Markov chain* from *countable space* to gene
 $$X_{t+1} = X_t + B_t, \ \text{ with } B_t \sim \mathcal{N}(0, \sigma^2 I).$$
 
 - For this case, the stochastic kernel is given by $P_x = P_{\mathcal{N}(x, \sigma^2 I)}$.
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{imgs/brownianmotion.png}
+\end{center}
 
 ---
 

@@ -10,6 +10,10 @@ title: Lecture 2 - Monte Carlo Methods
 - Stochastic optimization
 - Characterizing distributions
 
+\begin{center}
+\includegraphics[width=0.35\textwidth]{imgs/montecarlo.png}
+\end{center}
+
 ---
 
 # Motivation: Expectations in Statistical Analysis #
@@ -164,6 +168,14 @@ Let $p$ be the *probability mass function* over $\{1, \ldots, K\}$. Please desig
 	$$P(\text{accept}) = \int \frac{p(x)}{M q(x)} q(x) \mu(dx) = \frac{1}{M}.$$
 
 - What are the problems of this method?
+
+---
+
+# Rejection Sampling (Illustration) #
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{imgs/rejectsample.png}
+\end{center}
 
 ---
 
