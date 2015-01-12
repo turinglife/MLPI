@@ -5,6 +5,9 @@ PRE = slide_template.tex
 
 all: slides
 
+clean:
+	rm -f *.pdf
+
 slides: \
 	lec0_overview.pdf \
 	lec1_math.pdf
