@@ -1,5 +1,5 @@
 ---
-title: Lecture 2 - Monte Carlo Methods
+title: Lecture 2 - Monte Carlo Methods (Basics)
 ---
 
 # Monte Carlo Methods #
