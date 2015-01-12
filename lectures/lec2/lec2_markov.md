@@ -26,9 +26,9 @@
     
     Here, $A$ is an arbitrary measurable subset of $\Omega$.
     
-- When $\Omega$ is *finite* or *countable*, this is called a *Markov chain*. When $\Omega$ is a general measurable space, this is called a *Harris chain*.
+. . .
 
-- Much of the analysis for Markov chains can be generalized to Harris chains (this may require more sophisticated math tools).
+- We first review the formulation and properties of *Markov chains* under a simple setting, where $\Omega$ is a countable space. We will later extend the analysis to more general spaces.
 
 ---
 
@@ -199,7 +199,7 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 
 ---
 
-# Total Variation Distance #
+# Mixing #
 
 - Let $\mu$ and $\nu$ be probability measures over a measurable space $(\Omega, \mathcal{S})$, then the *total variation distance* between them is defined as
 
@@ -210,20 +210,6 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 	$$\|\mu - \nu\|_{TV} = \frac{1}{2} \sum_{x \in \Omega} \left|\mu(x) - \nu(x)\right|.$$
 
 - The *total variation distance* is a metric.
-
-- *Dual characterization:* 
-
-	$$\|\mu - \nu\|_{TV} = \frac{1}{2} \sup \left\{ \int f d\mu - \int f d\nu: \|f\|_\infty \le 1 \right\}.$$
-
----
-
-# Mixing #
-
-Consider an ergodic Markov chain defined over a countable space $\Omega$, with the transition probability matrix $P$ and the equilibrium distribution $\pi$ : 
-
-- Let $d(t) = \sup_{x \in \Omega} \|P^t(x, \cdot) - \pi\|_{TV}$ and $\bar{d}(t) = \sup_{x, y \in \Omega} \|P^t(x, \cdot) - P^t(y, \cdot)\|_{TV}$.
-
-- $d(t) \le \bar{d}(t) \le 2 \cdot d(t)$.
 
 . . .
 
@@ -353,11 +339,83 @@ Consider a $2 \times 2$ stochastic matrix $P$, given by $P(x, y) = 1 - p$ when $
 ---
 
 
+# General Markov Chains #
 
+Next, we extend the formulation of *Markov chain* from *countable space* to general *measurable space*. 
 
+- First, the *Markov property* remains.
 
+. . .
 
+- Generally, a *homogeneous Markov chain* over a measurable space $(\Omega, \mathcal{S})$ is characterized by an *initial measure* $\pi_0$ and a *stochastic kernel* $P: \Omega \times \mathcal{S} \rightarrow [0, 1]$, denoted by $Markov(\pi_0, P)$.  Here, $\Omega$ is called the *state space*; and:
 
+	$$\mathrm{Pr}(X_{t+1} \in A | X_t = x) = P(x, A).$$
+	
+- The *stochastic kernel* $P$ has to satisfy:
+	- Given $x \in \Omega$, $P_x: A \mapsto P(x, A)$ is a *probability measure* over $(\Omega, \mathcal{S})$.
+	- Given a measurable subset $A \in \mathcal{S}$, $P(\cdot, A): x \mapsto P(x, A)$ is a measurable function. 
+
+- When $\Omega$ is a countable space, $P$ reduces to a *stochastic matrix*.
+
+---
+
+# General Markov Chains (cont'd) #
+
+- Suppose the distribution of $X_t$ is $\pi_t$, then
+
+	$$\pi_{t+1}(A) = \int_\Omega P(x, A) \pi_t(dx)$$
+	
+	Again, we can simply write this as $\pi_{t+1} = \pi_t P$.
+
+- Composition of stochastic kernels $P$ and $Q$ remains a stochastic kernel, denoted by $Q \circ P$, which is given by:
+
+	$$(Q \circ P)(x, A) = \int_\Omega P(x, dy) Q(y, A).$$
+
+- Recursive composition of $P$ for $m$ times results in a stochastic kernel denoted by $P^m$, and we have $\mu_{t+m} = \mu_t P^m$.
+
+---
+
+# Example: Random Walk in $\mathbb{R}^n$ #
+
+$$X_{t+1} = X_t + B_t, \ \text{ with } B_t \sim \mathcal{N}(0, \sigma^2 I).$$
+
+- For this case, the stochastic kernel is given by $P_x = P_{\mathcal{N}(x, \sigma^2 I)}$.
+
+---
+
+# Irreducibility #
+
+- Let $\mu$ be a positive measure over $(\Omega, \mathcal{S})$. A *stochastic kernel* $P$ is called *$\mu$-irreducible* if for each $x \in \Omega$ and $A \in \mathcal{S}$ with $\mu(A) > 0$, there exists a positive integer $n$ such that $P^n(x, A) > 0$. 
+
+. . .
+
+- For typical spaces, we usually choose the *canonical base measure* as $\mu$. 
+	- For *countable space*, we use *counting measure* as $\mu$
+	- For $\mathbb{R}$, $\mathbb{R}^n$ or manifolds, we use *Lebesgue measure* as $\mu$.
+	- When $\mu$ is implicitly indicated by the context, we simply call a kernel $P$ *irreducible*.
+	- When $\Omega$ is countable, this notion is *irreducibility* coincides with the one introduced earlier.
+
+---
+
+# Irreducibility (cont'd) #
+	
+The following theorem provides an easier way to verify *irreducibility*.
+
+- A measurable subset $A \in \mathcal{S}$ with $\mu(A) > 0$ is called *$\mu$-communicating* if for each $x \in A$ and each $B \in \mathcal{S}$ that is contained in $A$, there exists a positive integer $n > 0$ such that $P^n(x, B) > 0$. 
+	- $P$ is irreducible if and only if $\Omega$ is *$\mu$-communicating*. 
+
+. . .
+
+- *(Irreducibility Theorem)* Let $P$ be a *stochastic kernel* over a *measurable* state space $(\Omega, \mathcal{S})$, then $P$ is *$\mu$-irreducible* if the following conditions are satisfied:
+	- $\Omega$ is *separable* (meaning $\Omega$ has a countable dense set) and *connected*;
+	- Every non-empty open subset $A$ of $\Omega$ has $\mu(A) > 0$;
+	- Every $x \in \Omega$ has a $\mu$-communicating neighborhood.
+
+. . .
+
+- **Note:** This irreducibility theorem does *NOT* apply to countable space. Why?
+
+---
 
 
 
