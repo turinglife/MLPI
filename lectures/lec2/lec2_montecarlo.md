@@ -134,11 +134,9 @@ Let $p$ be the *probability mass function* over $\{1, \ldots, K\}$. Please desig
 
 - Let $F$ be the *cumulative distribution function (cdf)* of a distribution $D$. Let $U \sim \mathrm{Uniform}([0, 1])$, then $F^{-1}(U) \sim D$.
 
+- Why $F^{-1}(U) \sim D$.
+
 . . .
-
-- **(Proof):** Let $X = F^{-1}(U)$:
-
-	$$P(X \le t) = P(F^{-1}(U) \le t) = P(U \le F(t)) = F(t).$$
 
 - How to generate a *exponentially distributed* sample ?
 
@@ -163,9 +161,9 @@ Let $p$ be the *probability mass function* over $\{1, \ldots, K\}$. Please desig
 
 . . .
 
-- Expected acceptance rate:
+- Why does this algorithm yield the desired distribution ?
 
-	$$P(\text{accept}) = \int \frac{p(x)}{M q(x)} q(x) \mu(dx) = \frac{1}{M}.$$
+- What are the acceptance rate?
 
 - What are the problems of this method?
 
@@ -244,7 +242,7 @@ Let $p$ be the *probability mass function* over $\{1, \ldots, K\}$. Please desig
 
 	$$\tilde{I}_{q,n}(f) = \frac{1}{n} \sum_{i=1}^n \tilde{w}_i f(x_i)$$
 
-	Here, $\tilde{w}_i$ is called the *self-normalized weight$, given by $\tilde{w}_i = \frac{w(x_i)}{\sum_{i=1}^n w(x_i)}.$
+	Here, $\tilde{w}_i$ is called the *self-normalized weight*, given by $\tilde{w}_i = \frac{w(x_i)}{\sum_{i=1}^n w(x_i)}.$
 
 - By strong law of large numbers, we have $\tilde{I}_{q,n}(f) \xrightarrow{a.s.} E_p[f]$ as $n \rightarrow \infty$.
 
