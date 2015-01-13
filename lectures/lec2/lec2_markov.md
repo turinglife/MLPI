@@ -76,7 +76,7 @@
 
 ---
 
-# Exercise #
+# Exercise 1 #
 
 \begin{center}
 \includegraphics[width=0.35\textwidth]{imgs/communicateclass.png}
@@ -148,7 +148,7 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 
 ---
 
-# Exercise #
+# Exercise 2 #
 
 \begin{center}
 \includegraphics[width=0.45\textwidth]{imgs/mchain2.png}
@@ -174,7 +174,7 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 
 ---
 
-# Exercise: 1D Random Walk #
+# Example: 1D Random Walk #
 
 \begin{center}
 \includegraphics[width=0.75\textwidth]{imgs/rwalk1d.png}
@@ -219,7 +219,7 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 
 - Let $\mu$ and $\nu$ be probability measures over a measurable space $(\Omega, \mathcal{S})$, then the *total variation distance* between them is defined as
 
-	$$\|\mu - \nu\|_{TV} = \sup_{A \in \mathcal{S}} \left|\mu(S) - \nu(S)\right|.$$
+	$$\|\mu - \nu\|_{TV} = \sup_{A \in \mathcal{S}} \left|\mu(A) - \nu(A)\right|.$$
 	
 	If $\Omega$ is *countable*, we have
 	
@@ -297,13 +297,13 @@ Consider an ergodic Markov chain on a finite space $\Omega$ with transition prob
 
 ---
 
-# Exercise 1 #
+# Exercise 3 #
 
 Consider an ergodic finite chain $P$ with $\gamma_* < \gamma$. To improve the mixing time, one can add a little bit lazyness as $P' = (1 - \alpha) P + \alpha I$. Please solve the optimal value of $\alpha$ that maximizes the *absolute spectral gap* $\gamma_*$.
 
 ---
 
-# Exercise 2 #
+# Exercise 4 #
 
 Consider a $2 \times 2$ stochastic matrix $P$, given by $P(x, y) = 1 - p$ when $x \ne y$.
 
@@ -314,26 +314,6 @@ Consider a $2 \times 2$ stochastic matrix $P$, given by $P(x, y) = 1 - p$ when $
 . . .
 
 - Solve the optimal value of $p$ that maximizes the absolute spectral gap.
-
----
-
-# Exercise 3 #
-
-- Consider a random walk on a circle of length $n$, where $n$ is even. At each state $x$, it walks to either of its neighbor with probability $p$, and stays at $x$ with probability $1 - 2p$.
-
-- Please specify the condition under which $P$ is ergodic.
-
-- What is the equilibrium distribution when $P$ is ergodic?
-
-. . .
-
-- Solve the optimal value of $p$ that maximizes the *conductance*.
-
-. . .
-
-- If we allow the chain to jump from $x$ to its *opposite* state with probability $q$ and thus the probability of staying at $x$ is $1 - 2p - q$. What's the conductance now?
-
-- Solve the optimal setting of $p$ and $q$.
 
 ---
 

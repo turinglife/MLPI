@@ -57,6 +57,146 @@
 \end{proof}
 
 
+\section{Markov Chain Theory}
+
+\begin{proposition}
+    When the state space $\Omega$ is countable, we have
+    \begin{equation}
+        \|\mu - \nu\|_{TV} = \frac{1}{2} \sum_{x \in \Omega} |\mu(x) - \nu(x) |.
+    \end{equation}
+\end{proposition}
+
+\begin{proof}
+    Let $A = \{x \in \Omega: \mu(x) \ge nu(x) \}$. By definition, we have 
+    \begin{align}
+        \|\mu - \nu\|_{TV} &\ge |\mu(A) - \nu(A)| = \mu(A) - \nu(A), \\
+        \|\mu - \nu\|_{TV} &\ge |\mu(A^c) - \nu(A^c)| = \nu(A^c) - \mu(A^c). 
+    \end{align}
+    We also have 
+    \begin{align}
+        \mu(A) - \nu(A) &= \sum_{x \in A} \mu(x) - \nu(x) = \sum_{x \in A} |\mu(x) - \nu(x)|, \\
+        \nu(A^c) - \mu(A^c) &= \sum_{x \in A^c} \nu(x) - \mu(x) = \sum_{x \in A^c} |\mu(x) - \nu(x) |.
+    \end{align}
+    Combining the equations above results in
+    \begin{align}
+        \|\mu - \nu\|_{TV} 
+        &\ge \frac{1}{2} \left(\mu(A) - \nu(A) + \nu(A^c) - \mu(A^c)\right) \notag \\
+        &= \frac{1}{2} \left( \sum_{x \in A} |\mu(x) - \nu(x)| + \sum_{x \in A^c} |\mu(x) - \nu(x) | \right) \notag \\
+        &= \frac{1}{2} \sum_{x \in \Omega} |\mu(x) - \nu(x)|.
+    \end{align}
+    Next we show the inequality of the other direction. For any $A \subset \Omega$, we have
+    \begin{equation}
+        |\mu(A^c) - \nu(A^c)| = \left|(\mu(\Omega) - \mu(A)) - (\nu(\Omega) - \nu(A))\right| = |\mu(A) - \nu(A)|
+    \end{equation}
+    Hence,
+    \begin{align}
+        |\mu(A) - \nu(A)|
+        &= \frac{1}{2} \left( |\mu(A) - \nu(A)| + |\mu(A^c) - \nu(A^c)| \right) \notag \\
+        &\le \frac{1}{2} \left( \sum_{x \in A} |\mu(x) - \nu(x) | + \sum_{x \in A^c} |\mu(x) - \nu(x) | \right) \notag \\
+        &\le \frac{1}{2} \sum_{x \in \Omega} |\mu(x) - \nu(x) |.
+    \end{align}
+    As $A$ is arbitrary, we can conclude that
+    \begin{equation}
+        \|\mu - \nu\|_{TV} \triangleq \sup_{A} |\mu(A) - \nu(A)| \le \frac{1}{2} \sum_{x \in \Omega} |\mu(x) - \nu(x)|.
+    \end{equation}
+    This completes the proof.
+\end{proof}
+
+
+\begin{proposition}
+    The total variation distance $(\mu, \nu) \mapsto \|\mu - \nu\|_{TV}$ is a metric.
+\end{proposition}
+
+\begin{proof}
+    To be completed.
+\end{proof}
+
+
+\section{Justification of MCMC Methods}
+
+\begin{proposition}
+    Samples produced using the Metropolis-Hastings algorithm has the desired distribution, and the resultant chain is reversible.
+\end{proposition}
+
+\begin{proof}
+    It suffices to show that the M-H update is \emph{reversible} \emph{w.r.t.}~$\pi$, which implies that $\pi$ is invariant.
+    The stochastic kernel of M-H update is given by
+    \begin{equation}
+        P(x, dy) = m(x) I(x, dy) + q(x, dy) a(x, y) = r(x) I(x, dy) + q_x(y) a(x, y) \mu(dy)
+    \end{equation}
+    Here, $\mu$ is the base measure, and $I(x, dy)$ is the identity measure given by $I(x, A) = 1(x \in A)$, and $m(x)$ is the probability that the proposal is rejected, which is given by
+    \begin{equation}
+        m(x) = 1 - \int_\Omega q(x, dy) a(x, y). 
+    \end{equation}
+    \textbf{Note:} this kernel is generally \emph{not} absolutely continuous \emph{w.r.t} the base measure $\mu$, and therefore we cannot directly use the equation $\pi(x) p_x(y) = \pi(y) p_y(x)$ here.
+    
+    To verify the reversibility, let's first look at the left hand side of the definition:
+    \begin{align}
+        \int \int f(x, y) \pi(dx) P(x, dy) 
+        &= \frac{1}{c} \int \int f(x, y) h(x) P(x, dy) \mu(dx) &  ... [\pi(dx) = \frac{1}{c} h(x) \mu(dx)] \notag \\
+        &= \frac{1}{c} \int \int f(x, y) h(x) m(x) I(x, dy) \mu(dx) & \notag \\
+        &+ \frac{1}{c} \int \int f(x, y) h(x) q_x(y) a(x, y) \mu(dx) \mu(dy) & ... [\text{expand } P(x, dy)] \notag \\
+        &= \frac{1}{c} \int f(x, x) h(x) m(x) \mu(dx) & \notag \\
+        &+ \frac{1}{c} \int \int f(x, y) h(x) q_x(y) a(x, y) \mu(dx) \mu(dy). 
+    \end{align}
+    Let $C$ be the first term and $g(x, y) \triangleq h(x) q_x(y) a(x, y)$, then this equation can be simplified into 
+    \begin{equation}
+        \int \int f(x, y) \pi(dx) P(x, dy) = C + \int \int f(x, y) g(x, y) \mu(dx) \mu(dy).
+    \end{equation}
+    Similarly, we have
+    \begin{align}
+        \int \int f(y, x) \pi(dx) P(x, dy) 
+        &= C + \int \int f(y, x) g(x, y) \mu(dx) \mu(dy) \notag \\
+        &= C + \int \int f(x, y) g(y, x) \mu(dx) \mu(dy). 
+    \end{align}
+    Hence, to show the reversibility, it suffices to show $g(x, y) = g(y, x)$. 
+    
+    Here, $a(x, y) = \min\{r(x, y), 1\}$. Also, from the definition $r(x, y) = \frac{h(y) q_y(x)}{h(x) q_x(y)}$, it is easy to see that $r(x, y) = 1 / r(y, x)$. 
+    We first consider the case where $r(x, y) \le 1$ (thus $r(y, x) \ge 1$), then 
+    \begin{equation}
+        g(x, y) 
+        = h(x) q_x(y) a(x, y) 
+        = h(x) q_x(y) \frac{h(y) q_y(x)}{h(x) q_x(y)}
+        = h(y) q_y(x),
+    \end{equation}
+    and
+    \begin{equation}
+        g(y, x) = h(y) q_y(x) a(y, x) = h(y) q_y(x).
+    \end{equation}
+    Hence, $g(x, y) = g(y, x)$ when $r(x, y) \le 1$. Similarly, we can show that the equality holds when $r(x, y) \ge 1$. 
+    This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    The Metropolis algorithm is a special case of the Metropolis-Hastings algorithm.
+\end{proposition}
+
+\begin{proof}
+    It suffices to show that when $q$ is symmetric, \textit{i.e.}~$q_x(y) = q_y(x)$, the acceptance rate reduces to the form given in the Metropolis algorithm.
+    Particularly, when $q_x(y) = q_y(x)$, the acceptance rate of the M-H algorithm is 
+    \begin{equation}
+        a(x, y) = \min \{ r(x, y), 1 \} 
+        = \min \left\{ \frac{h(y) q_y(x)}{h(x) q_x(y)}, 1\right\} = \min \left\{ \frac{h(y)}{h(x)}, 1\right\}.
+    \end{equation}
+    This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    The Gibbs sampling update is a special case of the Metropolis-Hastings update.
+\end{proposition}
+
+
+\begin{proof}
+    Without losing generality, we assume the sample is comprised of two components: $x = (x_1, x_2)$. Consider a proposal $q_x(dy) = \pi(dy_1, x_2) I(dx_2) $. In this case, we have
+    \begin{equation}
+        r((x_1, x_2), (y_1, x_2)) = \frac{\pi(y_1, x_2) \pi(x_1, x_2)}{\pi(x_1, x_2) \pi(y_1, x_2)} = 1.
+    \end{equation}
+    This implies that the candidate is always accepted. Also, generating a sample from $q_x$ is equivalent to drawing one from $p(y|z)$. This completes the argument.
+\end{proof}
+
+
+
+
 
 
 
