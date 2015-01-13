@@ -1,0 +1,23 @@
+--- # A list of lectures and their materials
+lectures:
+    - pre: lec0
+      name: overview
+      src:
+        - overview
+
+    - pre: lec1
+      name: math
+      src:
+        - math
+        - topology
+        - functional
+        - prob
+        - convex
+
+    - pre: lec2
+      name: montecarlo
+      src:
+        - montecarlo
+        - markov
+        - mcmc
+

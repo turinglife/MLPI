@@ -1,7 +1,9 @@
 ## generated pdf
 
-lec*.pdf
-
+.doit.db.db
+*.pyc
+lectures/notes
+lectures/slides
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

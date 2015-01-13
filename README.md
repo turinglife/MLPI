@@ -15,19 +15,24 @@ This course is going to cover several topics. For each topic, we will have lectu
 ## Syllabus
 
 - Exponential family distributions and conjugate prior
+- Monte Carlo Methods, Markov Chain Monte Carlo
 - Generalized linear model
 - Empirical risk minimization and Stochastic gradient descent 
 - Proximal methods for optimization
 - Graphical models: Bayesian Networks and Markov random fields
 - Sum-product and max-product algorithms, Belief propagation
 - Variational inference methods
-- Markov Chain Monte Carlo
 - Gaussian Processes and Copula Processes
 - Handling Big Data: Streaming process and Core sets
 
 *This sounds like a lot of stuff. Fortunately, you don’t have to memorize everything. Our goal is to provide you with an arsenal, from which you may find a weapon or two that are useful for you to tackle your problems.*
 
+---
 
+## Course Materials
 
+- Lecture notes and homework are posted on Piazza (Course Code: *IERG 6130*)
+- Most course materials were prepared using [Pandoc's Markdown](http://johnmacfarlane.net/pandoc/README.html#pandocs-markdown), and are compiled into presentation slides and/or handout notes.
+- The generated slides are also published on [Slideshare](http://www.slideshare.net/lindahua2015/presentations).
 
 

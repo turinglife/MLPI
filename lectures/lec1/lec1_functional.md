@@ -110,7 +110,7 @@ Let $\Omega$ be a Hilbert space:
 
 - Let $S$ be a non-empty convex closed subset of $\Omega$. Then there exists a unique element $y_* \in S$ such that $d(x, y_*) = d(x, S)$. This element $y_*$ is called the *projection* of $x$ onto $S$, denoted by $\mathrm{proj}_S(x)$.
 
-...
+. . .
 
 - **Question:** Why does $S$ need to be closed and convex?
 
