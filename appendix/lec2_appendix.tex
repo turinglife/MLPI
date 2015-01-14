@@ -8,6 +8,7 @@
 
 \newcommand{\pr}{\mathrm{Pr}}
 \newcommand{\tp}{\tilde{p}}
+\newcommand{\sset}{\mathcal{S}}
 
 \newcommand{\rsp}{\mathbb{R}}
 \newcommand{\unif}{\mathrm{Uniform}}
@@ -108,8 +109,140 @@
 \end{proposition}
 
 \begin{proof}
-    To be completed.
+    To show that it is a metric, we verify the four properties that a metric needs to satisfy one by one.
+    \begin{enumerate}
+        \item $\|\mu - \nu\|_{TV}$ is non-negative, as $|\mu(A) - \nu(A)|$ is always non-negative.
+        \item When $\mu = \nu$, $|\mu(A) - \nu(A)|$ is always zero, and hence $\|\mu - \nu\|_{TV} = 0$. 
+        On the other hand, when $\mu \ne \nu$, there exists $A \subset \sset$ such that $|\mu(A) - \nu(A)| > 0$, and therefore $\|\mu - \nu\|_{TV} \ge |\mu(A) - \nu(A)| > 0$.
+        Together we can conclude that $\|\mu - \nu\|_{TV} = 0$ iff $\mu = \nu$.
+        \item $\|\mu - \nu\|_{TV} = \|\nu - \mu\|_{TV}$ as $|\mu(A) - \nu(A)| = |\nu(A) - \mu(A)|$ holds for any measurable subset $A$.
+        \item Next, we show that the total variation distance satisfies the \emph{triangle inequality}, as below. Let $\mu$, $\nu$, $\eta$ be three probability measures over $\Omega$:
+        \begin{align}
+            \|\mu - \nu\|_{TV} 
+            &= \sup_{A \in \sset} |\mu(A) - \nu(A) | \notag \\
+            &= \sup_{A \in \sset} |\mu(A) - \eta(A) + \eta(A) - \nu(A) | \notag \\
+            &\le \sup_{A \in \sset} \left( |\mu(A) - \eta(A)| + |\eta(A) - \nu(A)| \right) \notag \\
+            &\le \sup_{A \in \sset} |\mu(A) - \eta(A) | + \sup_{A \in \sset} |\eta(A) - \nu(A) | \notag \\
+            &= \|\mu - \eta\|_{TV} + \|\eta - \nu\|_{TV}.
+        \end{align}
+    \end{enumerate}
+    The proof is completed. 
 \end{proof}
+
+
+\begin{proposition}
+    Consider a Markov chain over a countable space $\Omega$ with transition probability matrix $P$. Let $\pi$ be a probability measure over $\Omega$ that is in detailed balance with $P$, \textit{i.e.}~$\pi(x) P(x, y) = \pi(y) P(y, x), \ \forall x, y \in \Omega$. Then $\pi$ is invariant to $P$, \textit{i.e.}~$\pi = \pi P$.  
+\end{proposition}
+
+\begin{proof}
+    With the assumption of detailed balance, we have
+    \begin{align}
+        (\pi P)(y) = \sum_{x \in \Omega} \pi(x) P(x, y) = \sum_{x \in \Omega} \pi(y) P(y, x) = \pi(y) \sum_{x \in \Omega} P(y, x) = \pi(y).
+    \end{align}
+    Hence, $\pi = \pi P$, or in other words, $\pi$ is invariant to $P$. 
+\end{proof}
+
+
+\begin{proposition}
+    Let $(X_t)$ be an ergodic Markov chain $Markov(\pi, P)$ where $\pi$ is in detailed balance with $P$, then given arbitrary sequence $x_0, \ldots, x_n \in \Omega$, we have
+    \begin{equation}
+        \pr(X_0 = x_0, \ldots, X_n = x_n) = \pr(X_0 = x_n, \ldots, X_n = x_0).
+    \end{equation}
+\end{proposition}
+
+\begin{proof}
+    First, we have
+    \begin{equation} \label{eq:dp1}
+        \pr(X_0 = x_0, \ldots, X_n = x_n) = \pi(x_0) P(x_0, x_1) \cdots P(x_{n-1}, x_n).
+    \end{equation}
+    On the other hand, by detailed balance, we have $P(x, y) = \frac{\pi(y) P(y, x)}{\pi(x)}$, and thus
+    \begin{align} \label{eq:dp2}
+        \pr(X_0 = x_n, \ldots, X_n = x_0) 
+        &= \pi(x_n) P(x_n, x_{n-1}) \cdots P(x_1, x_0) \notag \\
+        &= \pi(x_n) \frac{\pi(x_{n-1}) P(x_{n-1}, x_n)}{\pi(x_n)} \cdots \frac{\pi(x_0) P(x_0, x_1)}{\pi(x_1)} \notag \\
+        &= P(x_{n-1}, x_n) \cdots P(x_0, x_1) \pi(x_0).
+    \end{align}
+    Comparing Eq.\eqref{eq:dp1} and Eq.\eqref{eq:dp2} results in the equality that we intend to prove.
+\end{proof}
+
+
+\begin{proposition}
+    Over a measurable space $(\Omega, \sset)$, if a stochastic kernel $P$ is reversible \textit{w.r.t.}~$\pi$, then $\pi$ is invariant to $P$.
+\end{proposition}
+
+\begin{proof}
+    Let $\pi' = \pi P$, it suffices to show that $\pi'(A) = \pi(A)$ for every $A \in \sset$ under the reversibility assumption.
+    Given any $A \in \sset$, let $f_A(x, y) := 1(y \in A)$, then we have
+    \begin{align}
+        \pi'(A) 
+        &= \int \pi(dx) P(x, A) \notag \\
+        &= \int \pi(dx) \int f_A(x, y) P(x, dy) \notag \\
+        &= \int \int f_A(x, y) \pi(dx) P(x, dy) \notag \\
+        &= \int \int f_A(y, x) \pi(dx) P(x, dy) \notag \\
+        &= \int \int 1(x \in A) \pi(dx) P(x, dy) \notag \\
+        &= \int 1(x \in A) \pi(dx) \int P(x, dy) \notag \\
+        &= \int 1(x \in A) \pi(dx) = \pi(A).
+    \end{align}
+    This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Given a stochastic kernel $P$ and a probability measure $\pi$ over $(\Omega, \sset)$. Suppose both $P_x$ and $\pi$ are absolutely continuous \text{w.r.t.}~a base measure $\mu$, that is,
+    $\pi(dx) = \pi(x) \mu(dx)$ and $P(x, dy) = P_x(dy) = p_x(y) \mu(dy)$, then $P$ is reversible \textit{w.r.t.}~$\pi$ if and only if 
+    \begin{equation}
+        \pi(x) p_x(y) = \pi(y) p_y(x), \ a.e.
+    \end{equation}
+\end{proposition}
+
+\begin{proof}
+    First, assuming detailed balance, \textit{i.e.}~$\pi(x) p_x(y) = \pi(y) p_y(x), \ a.e.$, we show reversibility.
+    \begin{align}
+        \int \int f(x, y) \pi(dx) P(x, dy) 
+        &= \int \int f(x, y) \pi(x) p_x(y) \mu(dx) \mu(dy) \notag \\
+        &= \int \int f(x, y) \pi(y) p_y(x) \mu(dx) \mu(dy) & ...[\text{detailed balance}] \notag \\
+        &= \int \int f(y, x) \pi(x) p_x(y) \mu(dx) \mu(dy) & ...[\text{exchange variables}] \notag \\
+        &= \int \int f(y, x) \pi(dx) P(x, dy).
+    \end{align}
+    Next, we show the converse.
+    The definition of reversibility implies that 
+    \begin{equation}
+        \int \int f(x, y) \pi(dx) P(x, dy) = \int \int f(x, y) \pi(dy) P(y, dx)
+    \end{equation}
+    Hence, 
+    \begin{equation}
+        \int \int f(x, y) \pi(x) p_x(y) \mu(dx) \mu(dy) = \int \int f(x, y) \pi(y) p_y(x) \mu(dx) \mu(dy)
+    \end{equation}
+    Hence, $f(x, y) \pi(x) p_x(y) = f(x, y) \pi(y) p_y(x) \ a.e.$ for arbitrary integrable function $f$, which implies that 
+    $\pi(x) p_x(y) = \pi(y) p_y(x) \ a.e$. 
+\end{proof}
+
+
+\begin{proposition} \label{prop:r2}
+    Given a stochastic kernel $P$ and a probability measure $\pi$ over $(\Omega, \sset)$. If $P(x, dy) = m(x) I_x(dy) + p_x(y) \mu(dy)$ and $\pi(x) p_x(y) = \pi(y) p_y(x) \ a.e$, then
+    $P$ is reversible \textit{w.r.t.}~$\pi$.
+\end{proposition}
+
+\begin{proof}
+    Under the given conditions, we have
+    \begin{align}
+        \int \int f(x, y) \pi(dx) P(x, dy)
+        &= \int \int f(x, y) \pi(dx) \left(m(x) I_x(dy) + p_x(y) \mu(dy) \right) \notag \\
+        &= \int \int f(x, y) m(x) \pi(dx) I_x(dy) + \int \int f(x, y) p_x(y) \mu(dy) \notag \\
+        &= \int f(x, x) m(x) \pi(dx) + \int \int f(x, y) p_x(y) \pi(dx) \mu(dy) \notag \\
+        &= \int f(x, x) m(x) \pi(dx) + \int \int f(x, y) p_x(y) \pi(x) \mu(dx) \mu(dy).
+    \end{align}
+    For the right hand side, we have
+    \begin{align}
+        \int \int f(y, x) \pi(dx) P(x, dy)
+        &= \int \int f(y, x) \pi(dx) \left(m(x) I_x(dy) + p_x(y) \mu(dy) \right) \notag \\
+        &= \int \int f(y, x) m(x) \pi(dx) I_x(dy) + \int \int f(y, x) p_x(y) \mu(dy) \notag \\
+        &= \int f(x, x) m(x) \pi(dx) + \int \int f(y, x) p_x(y) \pi(dx) \mu(dy) \notag \\
+        &= \int f(x, x) m(x) \pi(dx) + \int \int f(y, x) p_x(y) \pi(x) \mu(dx) \mu(dy) \notag \\
+        &= \int f(x, x) m(x) \pi(dx) + \int \int f(x, y) p_y(x) \pi(y) \mu(dx) \mu(dy).       
+    \end{align}
+    With $\pi(x) p_x(y) = \pi(y) p_y(x)$, we can see that the left and right hand sides are equal. This completes the proof.
+\end{proof}
+
 
 
 \section{Justification of MCMC Methods}
@@ -128,29 +261,8 @@
     \begin{equation}
         m(x) = 1 - \int_\Omega q(x, dy) a(x, y). 
     \end{equation}
-    \textbf{Note:} this kernel is generally \emph{not} absolutely continuous \emph{w.r.t} the base measure $\mu$, and therefore we cannot directly use the equation $\pi(x) p_x(y) = \pi(y) p_y(x)$ here.
-    
-    To verify the reversibility, let's first look at the left hand side of the definition:
-    \begin{align}
-        \int \int f(x, y) \pi(dx) P(x, dy) 
-        &= \frac{1}{c} \int \int f(x, y) h(x) P(x, dy) \mu(dx) &  ... [\pi(dx) = \frac{1}{c} h(x) \mu(dx)] \notag \\
-        &= \frac{1}{c} \int \int f(x, y) h(x) m(x) I(x, dy) \mu(dx) & \notag \\
-        &+ \frac{1}{c} \int \int f(x, y) h(x) q_x(y) a(x, y) \mu(dx) \mu(dy) & ... [\text{expand } P(x, dy)] \notag \\
-        &= \frac{1}{c} \int f(x, x) h(x) m(x) \mu(dx) & \notag \\
-        &+ \frac{1}{c} \int \int f(x, y) h(x) q_x(y) a(x, y) \mu(dx) \mu(dy). 
-    \end{align}
-    Let $C$ be the first term and $g(x, y) \triangleq h(x) q_x(y) a(x, y)$, then this equation can be simplified into 
-    \begin{equation}
-        \int \int f(x, y) \pi(dx) P(x, dy) = C + \int \int f(x, y) g(x, y) \mu(dx) \mu(dy).
-    \end{equation}
-    Similarly, we have
-    \begin{align}
-        \int \int f(y, x) \pi(dx) P(x, dy) 
-        &= C + \int \int f(y, x) g(x, y) \mu(dx) \mu(dy) \notag \\
-        &= C + \int \int f(x, y) g(y, x) \mu(dx) \mu(dy). 
-    \end{align}
-    Hence, to show the reversibility, it suffices to show $g(x, y) = g(y, x)$. 
-    
+    Let $g(x, y) = h(x) q_x(y) a(x, y)$. With Proposition~\ref{prop:r2}, it suffices to show that $g(x, y) = g(y, x)$. 
+    %
     Here, $a(x, y) = \min\{r(x, y), 1\}$. Also, from the definition $r(x, y) = \frac{h(y) q_y(x)}{h(x) q_x(y)}$, it is easy to see that $r(x, y) = 1 / r(y, x)$. 
     We first consider the case where $r(x, y) \le 1$ (thus $r(y, x) \ge 1$), then 
     \begin{equation}
@@ -194,13 +306,46 @@
     This implies that the candidate is always accepted. Also, generating a sample from $q_x$ is equivalent to drawing one from $p(y|z)$. This completes the argument.
 \end{proof}
 
+\begin{proposition}
+    Let $K_1, \ldots, K_m$ be stochastic kernels with invariant measure $\pi$, and $q \in \rsp^m$ be a probability vector, then $K = \sum_{k=1}^m q_i K_i$ is also a stochastic kernel with invariant measure $\pi$. Moreover, if $K_1, \ldots, K_m$ are all reversible, then $K$ is reversible. 
+\end{proposition}
 
+\begin{proof}
+    First, it is easy to see that convex combinations of probability measures remain probability measures. As an immediate consequence, $K_x$, a convex combination of $K_i(x, \cdot)$, is also a probability measure. Given a measurable subset $A$, $K_i(\cdot, A)$ is measurable for each $i$, so is their convex combinations. Hence, we can conclude that $K$ remains a stochastic kernel. Next, we show that $\pi$ invariant to $K$, as
+    \begin{equation}
+        \pi K = \pi \left(\sum_{i=1}^m q_i K_i\right) = \sum_{i=1}^m q_i (\pi K_i) = \sum_{i=1}^m q_i \pi = \pi.
+    \end{equation}
+    This proves the first statement. Then, we assume that $K_1, \ldots, K_m$ are reversible, then for $K$, we have
+    \begin{align}
+        \int \int f(x, y) \pi(dx) K(x, dy) 
+        &= \sum_{i=1}^m q_i \int \int f(x, y) \pi(dx) K_i(x, dy) \notag \\
+        &= \sum_{i=1}^m q_i \int \int f(y, x) \pi(dx) K_i(x, dy) \notag \\
+        &= \int \int f(y, x) \pi(dx) K(x, dy).
+    \end{align}
+    This implies that $K$ is also reversible, thus completing the proof.
+\end{proof}
 
+\begin{proposition}
+    Let $K_1, \ldots, K_m$ be stochastic kernels with invariant measure $\pi$. Then $K = K_m \circ \cdots \circ K_1$ is also a stochastic kernel with invariant measure $\pi$. 
+\end{proposition}
 
-
-
-
-
-
+\begin{proof}
+    Consider $K = K_2 \circ K_1$. To show that $K$ is a stochastic kernel, we first show that $K_x(dy) = K(x, dy)$ is a probability measure. Given arbitrary measurable subset $A$, we have
+    \begin{equation}
+        K(x, A) = \int \int K_1(x, dy) K_2(y, A). 
+    \end{equation}
+    As this is a bounded non-negative integration and $K_2(y, A)$ is measurable, it constitutes a measure. Also, 
+    \begin{equation}
+        K(x, \Omega) = \int \int K_1(x, dy) K_2(y, \Omega) = \int K_1(x, dy) = 1.  
+    \end{equation}
+    Hence, $K(x, \cdot)$ is a probability measure, and thus $K$ a stochastic kernel.
+    Next, we show $\pi$ is invariant to $K$:
+    \begin{equation}
+        \pi K = \pi (K_2 \circ K_1) = (\pi K_1) K_2  = \pi K_2 = \pi.
+    \end{equation}
+    We have proved the statement for a composition of two kernels $K_1 \circ K_2$. By induction, we can further extend to finite composition, thus completing the proof.
+\end{proof}
 
 \end{document}
+
+

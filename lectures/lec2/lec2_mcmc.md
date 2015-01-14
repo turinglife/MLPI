@@ -24,9 +24,9 @@ Most Markov chains in MCMC practice falls in a special family: *reversible chain
 
 - An irreducible Markov chain with TPM $P$ and an invariant distribution $\pi$ is called *reversible* if $\pi$ is in *detailed balance* with $P$. 
 
-- Consider an irreducible Markov chain $(X_t)$ $Markov(\pi, P)$ where $\pi$ is in *detailed balance* with $P$, its *reversal* $(\hat{X}_t)$ is given by $(\pi, \hat{P})$ with $\hat{P}(x, y) \triangleq \pi(y) P(y, x) / \pi(x)$. Then
+- Consider an irreducible Markov chain $(X_t)$ $Markov(\pi, P)$ where $\pi$ is in *detailed balance* with $P$, then
 
-	$$\Pr(X_0 = x_0, \ldots, X_n = x_n) = \Pr(\hat{X}_0 = x_n, \ldots, \hat{X}_n = x_0).$$
+	$$\Pr(X_0 = x_0, \ldots, X_n = x_n) = \Pr(X_0 = x_n, \ldots, X_n = x_0).$$
 
 ---
 
@@ -50,7 +50,7 @@ Over a general measurable space $(\Omega, \mathcal{S})$:
 
 	which is called the *detailed balance*. 
 
-- More generally, if $P(x, dy) = m(x) I_x(dy) + p_x(y) \mu(dy)$, where $I_x(A) = 1(x \in A)$, then the chain is *reversible* if and only if 
+- More generally, if $P(x, dy) = m(x) I_x(dy) + p_x(y) \mu(dy)$, where $I_x(A) = 1(x \in A)$, then the chain is *reversible* if 
 
 	$$\pi(x) p_x(y) = \pi(y) p_y(x), \ a.e.$$
 
@@ -133,7 +133,7 @@ Over a general measurable space $(\Omega, \mathcal{S})$:
 
 Let $K_1, \ldots, K_m$ be *stochastic kernels* with the same invariant probability measure $\pi$:
 
-- *(Mixture of kernels)*: Let $q$ be a probability vector, then $K := \sum_{i=1}^m q_k K_k$ remains a *stochastic kernel* with invariant probability measure $\pi$. 
+- *(Mixture of kernels)*: Let $q$ be a probability vector, then $K := \sum_{i=1}^m q_i K_i$ remains a *stochastic kernel* with invariant probability measure $\pi$. 
 	- Furthermore, if $K_1, \ldots, K_m$ are all reversible, then $K$ is reversible.
 
 . . .
