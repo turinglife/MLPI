@@ -183,6 +183,10 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 - Under what condition is this chain *recurrent*?
 - When it is *recurrent*, is it *positive recurrent* or *null recurrent*?
 
+. . .
+
+- **Answer:** the chain is *recurrent* if and only if $p = q$, and in such case, it is *null recurrent*. The proof of this result is left in the homework.
+
 ---
 
 # Ergodic Markov Chains #

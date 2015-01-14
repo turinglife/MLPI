@@ -40,13 +40,19 @@ Over a general measurable space $(\Omega, \mathcal{S})$:
 	
 	for any bounded measurable function $f: \Omega \times \Omega \rightarrow \mathbb{R}$.
 
+- If $P$ is *reversible* *w.r.t.* $\pi$, then $\pi$ is an *invariant* to $P$.
+
+# Reversible Chains on General Spaces (cont'd) #
+
 - Suppose both $\pi$ and $P_x$ are absolutely continuous *w.r.t.* a base measure $\mu$, that is, $\pi(dx) = \pi(x) \mu(dx)$ and $P(x, dy) = P_x(dy) = p_x(y) \mu(dy)$, then the chain is *reversible* if and only if
 
 	$$\pi(x) p_x(y) = \pi(y) p_y(x), \ a.e.$$
 
-	which is called the *detailed balance*.
+	which is called the *detailed balance*. 
 
-- If $P$ is *reversible* *w.r.t.* $\pi$, then $\pi$ is an *invariant* to $P$.
+- More generally, if $P(x, dy) = m(x) I_x(dy) + p_x(y) \mu(dy)$, where $I_x(A) = 1(x \in A)$, then the chain is *reversible* if and only if 
+
+	$$\pi(x) p_x(y) = \pi(y) p_y(x), \ a.e.$$
 
 ---
 
