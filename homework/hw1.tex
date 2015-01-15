@@ -1,0 +1,121 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[top=1in,bottom=1in,]{geometry}
+\usepackage{enumerate}
+\usepackage{amsmath,amsfonts,amssymb}
+
+\newcommand{\pr}{\mathrm{Pr}}
+\newcommand{\nsp}{\mathbb{N}}
+\newcommand{\rsp}{\mathbb{R}}
+\newcommand{\zsp}{\mathbb{Z}}
+
+\begin{document}
+
+\title{\bf IERG 6130 (2015 Spring) - Problem Set 1}
+\author{Instructor: Dahua Lin}
+\date{}
+\maketitle
+
+\part{Markov Chain Theory}
+
+\section*{Problem 1}
+
+It is an interesting problem to study the chance of success in gambling. Suppose a player \textit{Bob} with fortune $k$ units plays a game with a rich adversary with fortune $m$, where both $k$ and $m$ are positive integers and $k < m$. At each step, Bob has probability $p$ of winninig one unit and probability $1 - p$ of losing one unit. The game stops until either Bob or his adversary loses all the fortune. Let $X_t$ be the units of fortune that Bob has after $t$-steps, then $(X_t)$ is a Markov chain with $X_0 = k$.
+
+\begin{enumerate}[(a)]
+
+\item Please specify the transition probability matrix $P$. 
+
+\item Is this chain irreducible? 
+
+\item A state $x$ is called \textit{absorbing} if $P(x, x) = 1$. Are there any absorbing states of this chain? If so, please specify them.
+
+\item What's the probability that Bob loses the entire fortune at the end of the game? Please discuss this problem in three cases, $p = \frac{1}{2}$, $p < \frac{1}{2}$, and $p > \frac{1}{2}$. 
+
+\item If the Bob's adversary is \textit{infinitely} rich, what's the probability that Bob loses the entire fortune? Again, there are three cases, $p = \frac{1}{2}$, $p < \frac{1}{2}$, and $p > \frac{1}{2}$.  
+
+\end{enumerate}
+
+
+\section*{Problem 2}
+
+Consider a reflexive random walk over $\nsp$ with transition probability matrix $P$ as follows:
+\[
+P(x, x') = \begin{cases}
+     p & (x' = x + 1) \\
+     1 - p & (x > 0 \ \& \ x' = x - 1) \\
+     1 - p & (x = 0 \ \& \ x' = x) \\
+     0 & (\text{otherwise})
+ \end{cases},
+\]
+where $0 < p < 1$. 
+
+\begin{enumerate}[(a)]
+
+\item Is this chain irreducible and aperiodic?
+
+\item Please compute $P^{2n}(x, x)$. 
+
+\item Please show that this chain is recurrent if and only if $p = \frac{1}{2}$.
+
+\item Please show that this chain is positive recurrent when $p < \frac{1}{2}$ and null recurrent when $p = \frac{1}{2}$. 
+
+\item Please compute the equilibrium distribution $\pi$ when $p < \frac{1}{2}$.
+
+\end{enumerate}
+
+\clearpage
+
+\section*{Problem 3}
+
+Consider the random walk process over $\zsp$ described as follows. Starting from $X_0 = 0$, the chain evolves as follows:
+\[
+\pr(X_{t+1} = x' | X_t = x) = \begin{cases}
+     p & (x' = x + 1) \\
+     1 - p & (x' = x - 1) \\
+     0 & (\text{otherwise})
+ \end{cases}.
+\]
+
+\begin{enumerate}[(a)]
+
+\item Please show that this chain is recurrent if and only if $p = \frac{1}{2}$.
+
+\item Please show that this chain is null-recurrent when $p = \frac{1}{2}$. 
+
+\end{enumerate}
+
+
+\section*{Problem 4}
+
+Given a \textit{finite} Markov chain with transition probability matrix $P$, please show the following:
+
+\begin{enumerate}[(a)]
+
+\item If the chain is irreducible and aperiodic, please show that $P^n$ is positive, \textit{i.e.}~all elements are positive, for some $n \in \nsp$. 
+
+\item If the chain is aperiodic, please show that $P^n$ is not a positive matrix, \textit{i.e.}~at least one element is zero, for every $n \in \nsp$.
+
+\item If the chain is reducible, please show that $P^n$ is not a positive matrix, for every $n \in \nsp$. 
+
+\end{enumerate}
+
+
+\section*{Problem 5}
+
+Consider a Markov chain on $\mathbb{R}$ with $X_{t+1} | X_t \sim \mathrm{Uniform}(X_t - 1, X_t + 1)$. Please show that this chain is $\varphi$-irreducible \textit{w.r.t.}~the Lebesgue measure $\varphi$.
+
+\noindent \textbf{Note:} To show this, it suffices to show that starting from any $x \in \rsp$, the probability of entering any given interval $(a, b)$ in finite steps is positive. 
+
+
+\part{Basics of Monte Carlo Methods}
+
+
+
+
+
+
+
+\end{document}
+
+
