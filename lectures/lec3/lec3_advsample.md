@@ -5,12 +5,15 @@ shorttitle: Lecture 3
 
 # Overview #
 
-- Collapsed Sampling
+- Partially Collapsed Sampling
 - Parallel Tempering
 - Slice Sampling
 - Swendsen-Wang Algorithm
 - Reversible Jump
 - Particle Filtering
+
+
+---
 
 
 

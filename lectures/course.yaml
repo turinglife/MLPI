@@ -24,4 +24,4 @@ lectures:
     - pre: lec3
       name: advsample
       src:
-        - avsample
+        - advsample
