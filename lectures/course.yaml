@@ -21,3 +21,7 @@ lectures:
         - markov
         - mcmc
 
+    - pre: lec3
+      name: advsample
+      src:
+        - avsample

@@ -129,6 +129,71 @@ Over a general measurable space $(\Omega, \mathcal{S})$:
 
 ---
 
+# Example 1: Gaussian Mixture Model #
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{imgs/gmm3d.jpg}
+\end{center}
+
+- Formulation:
+
+	$$\theta_1, \ldots, \theta_K \sim \mathcal{N}(0, \sigma_0^2 I)$$
+	
+	$$z_i \sim \pi$$
+	
+	$$x_i \sim \mathcal{N}(\theta_{z_i}, \sigma_x^2 I)$$
+	
+---
+
+# Example 1: Gibbs Sampling #
+
+- Given $\{x_i\}$, initialize $\{\theta_k\}$ and $\{z_i\}$. 
+
+- Conditioned on $\{\theta_k\}$ and $x_i$, 
+
+	$$\mathrm{Pr}(z_i = k) \propto \pi_k p_{\mathcal{N}}(x_i | \theta_k, \sigma_x^2 I)$$
+	
+- Conditioned on $\{x_i\}$ and $\{z_i\}$:
+
+	$$\theta_k | \{(x_i, z_i)\} \sim p_{\mathcal{N}}(\tilde{\mu}_k, \tilde{\sigma}_k^2)$$
+
+	with
+
+	$$\tilde{\sigma}_k^2 = \left( \sigma_0^{-2} + n_k \sigma_x^{-2} \right)^{-1}$$
+
+	$$\tilde{\mu}_k = \tilde{\sigma}_k^{-2} \left( \sigma_x^{-2} \sum_{i: z_i = k} x_i \right)$$
+
+---
+
+# Example 2: Ising Model #
+
+\begin{center}
+\includegraphics[width=0.45\textwidth]{imgs/ising1.jpg}
+\end{center}
+
+- Formulation:
+
+	$$p(\mathbf{x}|\boldsymbol{\theta}) = \frac{1}{Z(\boldsymbol{\theta})}
+	\exp \left( \sum_{\{i,j\} \in E} \theta_{ij} x_i x_j \right).$$
+	
+	where the normalizing constant $Z$ is usually unknown and intractable to compute.
+	
+---
+
+# Example 2: Gibbs Sampling #
+
+- Let $x_{\backslash i}$ denote the entire $\mathbf{x}$ vector except for one entry $x_i$, 
+
+	$$p(x_i | x_{\backslash i}) \propto  \exp \left( x_i \sum_{j \in \mathcal{N}(i)} \theta_{ij} x_j \right).$$
+
+- How can we schedule the computation so that many updates can be done in parallel?
+
+. . .
+
+- Coloring
+
+---
+
 # Combination of MCMC Kernels #
 
 Let $K_1, \ldots, K_m$ be *stochastic kernels* with the same invariant probability measure $\pi$:
