@@ -24,9 +24,9 @@ Most Markov chains in MCMC practice falls in a special family: *reversible chain
 
 - An irreducible Markov chain with TPM $P$ and an invariant distribution $\pi$ is called *reversible* if $\pi$ is in *detailed balance* with $P$. 
 
-- Consider an irreducible Markov chain $(X_t)$ $Markov(\pi, P)$ where $\pi$ is in *detailed balance* with $P$, its *reversal* $(\hat{X}_t)$ is given by $(\pi, \hat{P})$ with $\hat{P}(x, y) \triangleq \pi(y) P(y, x) / \pi(x)$. Then
+- Consider an irreducible Markov chain $(X_t)$ $Markov(\pi, P)$ where $\pi$ is in *detailed balance* with $P$, then
 
-	$$\Pr(X_0 = x_0, \ldots, X_n = x_n) = \Pr(\hat{X}_0 = x_n, \ldots, \hat{X}_n = x_0).$$
+	$$\Pr(X_0 = x_0, \ldots, X_n = x_n) = \Pr(X_0 = x_n, \ldots, X_n = x_0).$$
 
 ---
 
@@ -40,13 +40,19 @@ Over a general measurable space $(\Omega, \mathcal{S})$:
 	
 	for any bounded measurable function $f: \Omega \times \Omega \rightarrow \mathbb{R}$.
 
+- If $P$ is *reversible* *w.r.t.* $\pi$, then $\pi$ is an *invariant* to $P$.
+
+# Reversible Chains on General Spaces (cont'd) #
+
 - Suppose both $\pi$ and $P_x$ are absolutely continuous *w.r.t.* a base measure $\mu$, that is, $\pi(dx) = \pi(x) \mu(dx)$ and $P(x, dy) = P_x(dy) = p_x(y) \mu(dy)$, then the chain is *reversible* if and only if
 
 	$$\pi(x) p_x(y) = \pi(y) p_y(x), \ a.e.$$
 
-	which is called the *detailed balance*.
+	which is called the *detailed balance*. 
 
-- If $P$ is *reversible* *w.r.t.* $\pi$, then $\pi$ is an *invariant* to $P$.
+- More generally, if $P(x, dy) = m(x) I_x(dy) + p_x(y) \mu(dy)$, where $I_x(A) = 1(x \in A)$, then the chain is *reversible* if 
+
+	$$\pi(x) p_x(y) = \pi(y) p_y(x), \ a.e.$$
 
 ---
 
@@ -123,11 +129,76 @@ Over a general measurable space $(\Omega, \mathcal{S})$:
 
 ---
 
+# Example 1: Gaussian Mixture Model #
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{imgs/gmm3d.jpg}
+\end{center}
+
+- Formulation:
+
+	$$\theta_1, \ldots, \theta_K \sim \mathcal{N}(0, \sigma_0^2 I)$$
+	
+	$$z_i \sim \pi$$
+	
+	$$x_i \sim \mathcal{N}(\theta_{z_i}, \sigma_x^2 I)$$
+	
+---
+
+# Example 1: Gibbs Sampling #
+
+- Given $\{x_i\}$, initialize $\{\theta_k\}$ and $\{z_i\}$. 
+
+- Conditioned on $\{\theta_k\}$ and $x_i$, 
+
+	$$\mathrm{Pr}(z_i = k) \propto \pi_k p_{\mathcal{N}}(x_i | \theta_k, \sigma_x^2 I)$$
+	
+- Conditioned on $\{x_i\}$ and $\{z_i\}$:
+
+	$$\theta_k | \{(x_i, z_i)\} \sim p_{\mathcal{N}}(\tilde{\mu}_k, \tilde{\sigma}_k^2)$$
+
+	with
+
+	$$\tilde{\sigma}_k^2 = \left( \sigma_0^{-2} + n_k \sigma_x^{-2} \right)^{-1}$$
+
+	$$\tilde{\mu}_k = \tilde{\sigma}_k^{-2} \left( \sigma_x^{-2} \sum_{i: z_i = k} x_i \right)$$
+
+---
+
+# Example 2: Ising Model #
+
+\begin{center}
+\includegraphics[width=0.45\textwidth]{imgs/ising1.jpg}
+\end{center}
+
+- Formulation:
+
+	$$p(\mathbf{x}|\boldsymbol{\theta}) = \frac{1}{Z(\boldsymbol{\theta})}
+	\exp \left( \sum_{\{i,j\} \in E} \theta_{ij} x_i x_j \right).$$
+	
+	where the normalizing constant $Z$ is usually unknown and intractable to compute.
+	
+---
+
+# Example 2: Gibbs Sampling #
+
+- Let $x_{\backslash i}$ denote the entire $\mathbf{x}$ vector except for one entry $x_i$, 
+
+	$$p(x_i | x_{\backslash i}) \propto  \exp \left( x_i \sum_{j \in \mathcal{N}(i)} \theta_{ij} x_j \right).$$
+
+- How can we schedule the computation so that many updates can be done in parallel?
+
+. . .
+
+- Coloring
+
+---
+
 # Combination of MCMC Kernels #
 
 Let $K_1, \ldots, K_m$ be *stochastic kernels* with the same invariant probability measure $\pi$:
 
-- *(Mixture of kernels)*: Let $q$ be a probability vector, then $K := \sum_{i=1}^m q_k K_k$ remains a *stochastic kernel* with invariant probability measure $\pi$. 
+- *(Mixture of kernels)*: Let $q$ be a probability vector, then $K := \sum_{i=1}^m q_i K_i$ remains a *stochastic kernel* with invariant probability measure $\pi$. 
 	- Furthermore, if $K_1, \ldots, K_m$ are all reversible, then $K$ is reversible.
 
 . . .

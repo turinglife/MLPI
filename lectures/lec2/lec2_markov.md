@@ -76,6 +76,17 @@
 
 ---
 
+# Exercise 1 #
+
+\begin{center}
+\includegraphics[width=0.35\textwidth]{imgs/communicateclass.png}
+\end{center}
+
+- Is this Markov chain *irreducible* ?
+- Please identify the *communicating classes*.
+
+---
+
 # Periodicity of Markov Chains #
 
 - The *period* of a state $x$ is defined as 
@@ -137,6 +148,18 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 
 ---
 
+# Exercise 2 #
+
+\begin{center}
+\includegraphics[width=0.45\textwidth]{imgs/mchain2.png}
+\end{center}
+
+- Is this chain *irreducible*? 
+- Is this chain *periodic*?
+- Please compute the *invariant distribution*.
+
+---
+
 # Positive Recurrence #
 
 - The *expected return time* of a state $x$ is defined to be $m_x \triangleq E[T_x]$.
@@ -148,6 +171,21 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 . . .
 
 - *(Existence of Invariant distributions)* For an *irreducible* Markov chain, if some state is *positive recurrent*, then all states are *positive recurrent* and the chain has an *invariance distribution* $\pi$ given by $\pi(x) = 1 / m_x$. 
+
+---
+
+# Example: 1D Random Walk #
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{imgs/rwalk1d.png}
+\end{center}
+
+- Under what condition is this chain *recurrent*?
+- When it is *recurrent*, is it *positive recurrent* or *null recurrent*?
+
+. . .
+
+- **Answer:** the chain is *recurrent* if and only if $p = q$, and in such case, it is *null recurrent*. The proof of this result is left in the homework.
 
 ---
 
@@ -185,7 +223,7 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 
 - Let $\mu$ and $\nu$ be probability measures over a measurable space $(\Omega, \mathcal{S})$, then the *total variation distance* between them is defined as
 
-	$$\|\mu - \nu\|_{TV} = \sup_{A \in \mathcal{S}} \left|\mu(S) - \nu(S)\right|.$$
+	$$\|\mu - \nu\|_{TV} = \sup_{A \in \mathcal{S}} \left|\mu(A) - \nu(A)\right|.$$
 	
 	If $\Omega$ is *countable*, we have
 	
@@ -196,31 +234,6 @@ Consider a Markov chain with TPM $P$ on $\Omega$:
 . . .
 
 - The time required by a Markov chain to get close to the equilibrium distribution is measured by the *mixing time*, defined as $t_{mix}(\epsilon) = \inf\{t: d(t) \le \epsilon\}$, and in particular $t_{mix} \triangleq t_{mix}(1/4)$.
-
----
-
-# Bounds of Mixing Time #
-
-There are various ways to bound the mixing time, taking into account different factors:
-
-- Counting Bound
-- Diameter Bound
-- Spectral Analysis
-- Conductance
-
----
-
-# Simple Bounds on Mixing Time #
-
-- *(Counting Bound)*: if the chain can only transit to a limited number of states from each state, it may take quite a long time to cover the explore the entire space. Consider an ergodic finite Markov chain over $\Omega$ whose equilibrium distribution is uniform, then
-
-	$$t_{mix}(\epsilon) \ge \frac{\log\left(|\Omega|(1 - \epsilon)\right)}{\log \Delta}.$$
-
-	Here, $\Delta$ is the maximum outgoing degree of each state.
-	
-. . .
-
-- *(Diameter Bound)*: For an ergodic finite Markov chain, we have $t_{mix}(\epsilon) \ge L / 2$ for any $\epsilon < 1 / 2$, where $L$ is the *diameter* of the state graph.
 
 ---
 
@@ -280,13 +293,21 @@ Consider an ergodic Markov chain on a finite space $\Omega$ with transition prob
 
 ---
 
-# Exercise 1 #
+# Conductance (Illustration) #
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{imgs/mcbottleneck.png}
+\end{center}
+
+---
+
+# Exercise 3 #
 
 Consider an ergodic finite chain $P$ with $\gamma_* < \gamma$. To improve the mixing time, one can add a little bit lazyness as $P' = (1 - \alpha) P + \alpha I$. Please solve the optimal value of $\alpha$ that maximizes the *absolute spectral gap* $\gamma_*$.
 
 ---
 
-# Exercise 2 #
+# Exercise 4 #
 
 Consider a $2 \times 2$ stochastic matrix $P$, given by $P(x, y) = 1 - p$ when $x \ne y$.
 
@@ -297,26 +318,6 @@ Consider a $2 \times 2$ stochastic matrix $P$, given by $P(x, y) = 1 - p$ when $
 . . .
 
 - Solve the optimal value of $p$ that maximizes the absolute spectral gap.
-
----
-
-# Exercise 3 #
-
-- Consider a random walk on a circle of length $n$, where $n$ is even. At each state $x$, it walks to either of its neighbor with probability $p$, and stays at $x$ with probability $1 - 2p$.
-
-- Please specify the condition under which $P$ is ergodic.
-
-- What is the equilibrium distribution when $P$ is ergodic?
-
-. . .
-
-- Solve the optimal value of $p$ that maximizes the *conductance*.
-
-. . .
-
-- If we allow the chain to jump from $x$ to its *opposite* state with probability $q$ and thus the probability of staying at $x$ is $1 - 2p - q$. What's the conductance now?
-
-- Solve the optimal setting of $p$ and $q$.
 
 ---
 
@@ -362,6 +363,10 @@ Next, we extend the formulation of *Markov chain* from *countable space* to gene
 $$X_{t+1} = X_t + B_t, \ \text{ with } B_t \sim \mathcal{N}(0, \sigma^2 I).$$
 
 - For this case, the stochastic kernel is given by $P_x = P_{\mathcal{N}(x, \sigma^2 I)}$.
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{imgs/brownianmotion.png}
+\end{center}
 
 ---
 

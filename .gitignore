@@ -4,6 +4,9 @@
 *.pyc
 lectures/notes
 lectures/slides
+appendix/*.pdf
+homework/hw*.pdf
+
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
