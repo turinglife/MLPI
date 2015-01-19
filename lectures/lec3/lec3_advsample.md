@@ -317,6 +317,10 @@ One iteration of *Simulated Tempering* consists of two steps:
 
 # Parallel Tempering (Discussion) #
 
+- It is efficient and very easy to implement, especially in a parallel computing environment. 
+
+. . .
+
 - It is often an *art* instead of a *technique* to tune a parallel tempering system (both the temperature ladder and the controlling parameter of each individual chain). 
 
 . . .
@@ -329,9 +333,91 @@ One iteration of *Simulated Tempering* consists of two steps:
 
 ---
 
+# Extended Ising Model #
 
+- The standard *Ising model* is defined as
 
+	$$p(\mathbf{x} | \boldsymbol{\theta}) = 
+	\frac{1}{Z} \prod_{\{i,j\} \in E} f_{ij}\left(x^{(i)}, x^{(j)}\right) = 
+	\frac{1}{Z} \exp\left(
+		\sum_{\{i,j\} \in E} \theta_{ij} x^{(i)} x^{(j)}
+	\right),$$
+	
+	where $x_i \in \{-1, +1\}$ for each $i$ is called a *spin*, and $\theta_{ij} \ge 0$. 
+	
+- Gibbs sampling is extremely slow, especially when the temperature is low.
 
+. . .
+
+- We extend the model by introducing additional *bond variables* $u^{(ij)}$, each for an edge. Each bond has two states: $0$ indicating *connected* and $1$ indicating *disconnected*. 
+
+- We define a joint distribution that couples the *spins* and *bonds*, 
+
+	$$p(\mathbf{x}, \mathbf{b}) 
+	= \frac{1}{Z'} \prod_{\{i,j\} \in E}
+	g_{ij}\left(x^{(i)}, x^{(j)}, u^{(ij)}\right)$$  
+
+---
+
+# Extended Ising Model (cont'd) #
+
+- Here, $g_{ij}(x, y, u)$ is described as below:
+	- When $u = 0$, $g_{ij}(x, y, u) = \exp(-\theta_{ij})$ for each setting of $(x, y)$ 
+	- When $u = 1$, $g_{ij}(x, y, u) = 1(x = y) \left( \exp(\theta_{ij}) - \exp(-\theta_{ij}) \right)$  
+
+. . .
+
+- With this setting, $g_{ij}(x, y, u)$ can be written as:
+
+	$$g_{ij}(x, y, u) = f_{ij}(x, y) \cdot q_{ij}(u|x, y),$$
+	
+	where $q_{ij}(u | x, y) = g_{ij}(x, y, u) / f_{ij}(x, y)$, which can be described as:
+	
+	- when $x \ne y$, $u$ must be $0$
+	- when $x = y$, $u$ is set to zero with probability $\exp(-2 \theta_{ij})$.  
+ 
+---
+
+# Swendsen-Wang Algorithm #
+
+The *Swendsen-Wang* algorithm (*R. Swendsen* and *J. Wang*, *1987*) is a Gibbs sampling algorithm based on the *extended Ising model*. Each iteration consists of two steps:
+
+- *(Clustering):* conditioned on the *spins* $\mathbf{x}$, draw the *bonds* $\mathbf{u} \sim p(\mathbf{u} | \mathbf{x})$ independenly. For an edge $\{i, j\} \in E$:
+	- If $x^{(i)} \ne x^{(j)}$, set $u^{(ij)} = 0$
+	- If $x^{(i)} = x^{(j)}$, set $u^{(ij)} = 1$ with probability $1 - \exp(-2\theta_{ij})$ or $0$ otherwise.
+	- Given $\mathbf{u}$, all nodes are partitioned into several *connected components*.
+
+. . .
+
+- *(Swapping):* conditioned on the *bonds* $\mathbf{b}$, draw the *spins* $\mathbf{x} \sim p(\mathbf{x} | \mathbf{u})$. 
+	- For each connected component, draw $+1$ or $-1$ with equal chance, and assign the resultant value to all nodes in the component. 
+
+---
+
+# Swendsen-Wang Algorithm (Illustration) #
+
+\begin{center}
+\includegraphics[width=0.98\textwidth]{imgs/swang1.pdf}
+\end{center}
+
+---
+
+# Swendsen-Wang Algorithm (Discussion) #
+
+- When $\theta_{ij}$ is large, $u^{(ij)}$ has a high probability of being set to one, *i.e.* $x^{(i)}$ and $x^{(j)}$ are likely to be connected. 
+
+. . .
+
+- Experiments show that the *Swendsen-Wang* algorithm mixes very rapidly, especially for rectangular grids.
+	- Can you provide an intuitive explanation?
+
+. . .
+
+- The *Swendsen-Wang* algorithm can be generalized to Potts models (nodes can take values from a finite set). 
+
+- The *Swendsen-Wang* algorithm has been widely used in image analysis applications, *e.g.* image segmentation (in this case, it is called *Swendsen-Wang cut*).
+
+---
 
 
 
