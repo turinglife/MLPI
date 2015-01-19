@@ -7,9 +7,9 @@ shorttitle: Lecture 3
 
 - Partially Collapsed Sampling
 - Sampling with Auxiliary Variables 
+	- Slice Sampling
 	- Simulated Tempering & Parallel Tempering
 	- Swendsen-Wang Algorithm
-	- Slice Sampling
 - Hamiltonian Monte Carlo
 - Reversible Jump
 - Particle Filtering
@@ -176,6 +176,84 @@ We want to sample from $p\left((g_i), (\mu_i) | (y_{ij})\right)$.
 	- Specify an auxiliary variable $U$ and the joint distribution $p(X, U)$ such that $p(x) = \int p(x, u) \mu(du)$ for certain $\mu$. 
 	- Design a chain to update $(X, U)$ using the M-H algorithm or the Gibbs sampler.
 	- The samples of $p(X)$ can then be obtained through *marginalization* or *conditioning*.
+
+---
+
+**Slice Sampling**
+
+---
+
+# Slice Sampler #
+
+- Sampling $x \sim p(x)$ is equivalent to sampling uniformly from the area under $p(x)$: $\mathcal{A} = \{(x, y): 0 \le y \le f(x)\}$.
+
+. . .	
+
+- Gibbs sampling based on the uniform distribution over $\mathcal{A}$. Each iteration consists of two steps:
+	- Given $x$, $y \sim \mathrm{Uniform}([0, f(x)])$
+	- Given $y$, $x \sim \mathrm{Uniform}(\{x: f(x) \ge y\})$
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{imgs/slicesample.png}
+\end{center}
+
+---
+
+# Slice Sampler (Discussion) #
+
+- *Slice sampler* can mix very rapidly, as it will not be locally trapped.
+
+. . .
+
+- *Slice sampler* is often very difficult to implement in practice. 
+	- For many distributions, drawing $x \sim \mathrm{Uniform}(\{x: f(x) \ge y\})$ is no less difficult than drawing directly from the original distribution.
+
+. . .
+
+- For distributions of certain forms, which have an *easy way* to draw $x \sim \mathrm{Uniform}(\{x: f(x) \ge y\})$, *slice sampling* is good strategy. 
+	- **Note:** In the step to draw $x$ (given $y$), one can use MCMC.
+
+---
+
+# Generative Model With Gaussian Prior #
+
+- Consider a generative model with Gaussian prior:
+	- prior: $\boldsymbol{\theta} \sim \mathcal{N}(\mathbf{0}, \boldsymbol{\Sigma})$
+	- likelihood: $L(\boldsymbol{\theta}) = \prod_{i=1}^n p(\mathbf{x}_i | \boldsymbol{\theta})$
+
+- Hence the posterior distribution has a density proportional to $\exp\left(- \frac{1}{2} \boldsymbol{\theta}^T \boldsymbol{\Sigma}^{-1} \boldsymbol{\theta}\right) L(\boldsymbol{\theta})$
+
+. . .
+
+- If the likelihood model is non-Gaussian, sampling from this posterior is often nontrivial. 
+
+---
+
+# Metropolis Algorithm #
+
+We begin with the Metropolis algorithm. In each iteration
+
+- Propose a new state: $\boldsymbol{\theta}' = \boldsymbol{\theta} \cos(\alpha) + \boldsymbol{\nu} \sin(\alpha)$ with $\boldsymbol{\nu} \sim \mathcal{N}(\mathbf{0}, \boldsymbol{\Sigma})$
+	- Here, $\alpha$ is the *(circular) step size*
+	- When $\alpha = \pm \pi$, it is a new draw from the prior, when $\alpha$ is close to $0$, it is a conservative perturbation of the original state. 
+
+. . .
+
+- How can you decide the step size $\alpha$?
+
+. . .
+
+- It is desirable to have an algorithm that can *adaptively* choose the step size. 
+	- A natural idea: incorporate $\alpha$ as an *auxiliary variable*.
+
+---
+
+# Elliptical Slice Sampling (One Update Iteration) #
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{imgs/essalg.pdf}
+\end{center}
+
 
 ---
 
