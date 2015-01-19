@@ -105,18 +105,58 @@ We want to sample from $p\left((g_i), (\mu_i) | (y_{ij})\right)$.
 
 ---
 
-# Lag-one Autocorrelation #
+# Rao-Blackwell Theorem #
 
-- Generally, a Markov chain $(X_t)$ mixes faster when it has lower *lag-one autocorrelation* $\rho(X_{t+1}, X_t)$, where $\rho$ is defined to be:
-
-	$$\rho(Y, X) \triangleq \sup \mathrm{corr}(h(Y), g(X)) = \sup_{h: \mathrm{var}(h(Y)) = 1}
-	\left( \mathrm{var}\left[ E[h(Y) | X] \right] \right)^{1/2}$$
+- Why do collapsed samplers often perform better than full-fledged Gibbs samplers?
 
 . . .
 
-- *(Rao-Blackwell Theorem)* Sampling more components in the first step of a Gibbs sampler improves (*i.e.* reduces) the maximal autocorrelation.
+- Consider an example $p(X, Y)$ and we want to estimate $E[h(X, Y)]$. Suppose we have two tractable ways to do so:
+	1. Draw $(x_1, y_1), \ldots, (x_n, y_n) \sim p(X, Y)$, and compute
 
-	$$E\left[ E[h(X) | x_1]^2 \right] \le E\left[ E[h(X) | x_1, x_2]^2 \right]$$
+		$$\bar{h}_1 = \frac{1}{n} \sum_{i=1}^n h(x_i, y_i).$$
+
+	2. Draw $x_1, \ldots, x_n \sim p(X)$ where $p(X)$ is the marginal distribution, and compute
+	
+		$$\bar{h}_2 = \frac{1}{n} \sum_{i=1}^n E_{p(Y|x_i)}[h(x_i, y)].$$
+		
+		Here, we assume that there is a tractable way to compute $E_{p(Y|x)}[h(x, y)]$ exactly.
+
+. . .
+
+- Which one is better? Can you justify your answer?
+
+---
+
+# Rao-Blackwell Theorem (cont'd) #
+
+- Let $\mu = E[h(X, Y)]$, then $E[\bar{h}_1] = E[\bar{h}_2] = \mu$. By Strong LLN, both $\bar{h}_1$ and $\bar{h}_2$ converge to $\mu$ almost surely.
+
+. . .
+
+- *(Rao-Blackwell Theorem)* Sample variance will be reduced when some components are marginalized out. With the setting above, we have
+
+	$$\mathrm{var}\left[ \bar{h}_1 \right] \ge \mathrm{var} \left[ \bar{h}_2 \right].$$
+	
+	Can you show this? 
+
+. . .
+
+- Generally, *reducing sample variance* would also lead to the reduction of *autocorrelation* of the chain, thus improving the mixing performance. 
+
+---
+
+# Gaussian Mixture Model (Revisited) #
+
+- Consider the following model
+
+	$$\theta_1, \ldots, \theta_m \sim \mathcal{N}(0, \sigma_0^2)$$
+	
+	$$z_i \sim \pi, \ x_i \sim \mathcal{N}(\mu_{z_i}, \sigma_x^2), \ \text{ for } i = 1, \ldots, n$$
+
+- Please design a *Collapsed Gibbs sampler* with $\boldsymbol{\theta} = (\theta_1, \ldots, \theta_m)$ marginalized out.  
+
+. . .
 
 
 
