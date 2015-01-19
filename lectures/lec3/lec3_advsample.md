@@ -8,9 +8,9 @@ shorttitle: Lecture 3
 - Partially Collapsed Sampling
 - Sampling with Auxiliary Variables 
 	- Simulated Tempering & Parallel Tempering
-	- Slice Sampling
 	- Swendsen-Wang Algorithm
-	- Hybrid Monte Carlo
+	- Slice Sampling
+- Hamiltonian Monte Carlo
 - Reversible Jump
 - Particle Filtering
 
