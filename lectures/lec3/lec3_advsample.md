@@ -6,9 +6,12 @@ shorttitle: Lecture 3
 # Overview #
 
 - Partially Collapsed Sampling
-- Parallel Tempering
-- Slice Sampling
-- Swendsen-Wang Algorithm
+- Sampling with Auxiliary Variables 
+	- Simulated Tempering
+	- Parallel Tempering
+	- Slice Sampling
+	- Swendsen-Wang Algorithm
+	- Hybrid Monte Carlo
 - Reversible Jump
 - Particle Filtering
 
@@ -157,6 +160,115 @@ We want to sample from $p\left((g_i), (\mu_i) | (y_{ij})\right)$.
 - Please design a *Collapsed Gibbs sampler* with $\boldsymbol{\theta} = (\theta_1, \ldots, \theta_m)$ marginalized out.  
 
 . . .
+
+---
+
+# Sampling with Auxiliary Variables #
+
+- The *Rao Blackwell Theorem* suggests that in order to achieve better performance, one should try to marginalize out as many components as possible.
+
+- However, in many cases, one may want to do the opposite, that is, to introduce additional variables to facilitate the simulations. 
+
+- For example, when the *target distribution* is *multimodal*, one may use an auxiliary variable, such as temperature, to help the chain escape from local traps.
+
+. . .
+
+- Basic framework
+	- Specify an auxiliary variable $U$ and the joint distribution $p(X, U)$ such that $p(x) = \int p(x, u) \mu(du)$ for certain $\mu$. 
+	- Design a chain to update $(X, U)$ using the M-H algorithm or the Gibbs sampler.
+	- The samples of $p(X)$ can then be obtained through *marginalization* or *conditioning*.
+
+---
+
+**Simulated Tempering**
+
+---
+
+# Gibbs Measure #
+
+- A *Gibbs measure* is a probability measure with a density in the following form:
+
+	$$p(x) = \frac{1}{Z(\alpha)} \exp \left( - \alpha E(x) \right).$$
+	
+	Here, $E(x)$ is called the *energy function*, $\alpha$ is called the *inverse temperature*, and the normalizing constant $Z$ depends on $\alpha$. 
+
+\begin{center}
+\includegraphics[width=0.3\textwidth]{imgs/amde.jpg}
+\end{center}
+	
+- In literature of MCMC sampling, we often parameterize a Gibbs measure using the *temperature parameter* $\tau = \alpha^{-1}$, thus $p(x) = \frac{1}{Z(\tau)} \exp \left( -E(x) / \tau \right)$.
+
+---
+
+# Tempered MCMC #
+
+- Typical MCMC methods usually rely on *local moves* to explore the state space. What is the problem?
+
+. . .
+
+- Local traps often leads to very poor mixing. Can we improve this?
+
+\begin{center}
+\includegraphics[width=0.45\textwidth]{imgs/ptemper.png}
+\end{center}
+
+---
+
+# Simulated Tempering #
+
+Suppose we intend to sample from $p(x) = \frac{1}{Z} \exp(-E(x))$:
+
+- **Basic idea:** Augment the target distribution by including a *temperature index $k$*,  which takes values from a finite set $1 \le \tau_0 < \cdots < \tau_m$, with joint distribution given by
+
+	$$p(x, k) = \frac{\pi_k}{Z_k} \exp\left(-\frac{E(x)}{\tau_k}\right)$$
+	
+	Here, $\pi_k$ is the prior weight of the $k$-th temperature and $Z_k$ is the corresponding normalizing constant. We only collect samples at the *lowest temperature*, $\tau_0 = 1$. 
+
+. . .
+
+- The chain mixes much faster at high temperatures, but we want to collect samples at the lowest temperature. So we have to constantly switch between temperatures. 
+
+- **Question:** How can we set the probabilities of switching between temperatures?
+
+---
+
+# Simulated Tempering (Algorithm) #
+
+One iteration of *Simulated Tempering* consists of two steps:
+
+- *(Base transition)*: update $x$ at the same temperature, *i.e.* holding $k$ fixed.
+
+- *(Temperature switching)*: with $x$ fixed, propose $k \rightarrow k'$ with $q(k, k')$
+	- $q(k, k')$ is typically set in a way such that $q(k, k') = q(k', k)$
+	- Accept the change with probability $a(k, k'|x) = \min(1, p(x, k') / p(x, k))$. 
+
+- All temperature levels play an important role. So it is desirable to spend comparable amount of time at each level. Setting $\pi_k = \frac{1}{m+1}$ for each $k$, we have
+
+	$$\frac{p(x, k')}{p(x, k)} = \frac{Z_k}{Z_{k'}} \exp 
+	\left( \left(\tau_{k}^{-1} - \tau_{k'}^{-1} \right) E(x) \right)$$
+
+---
+
+# Simulated Tempering (Discussion) #
+
+- The acceptance rate of temperature switching proposals depends on $p(x, k') / p(x, k)$. To have high acceptance rate, the distribution should have *similar shapes*.
+	- Set $\tau_0 = 1$. Given $\tau_k$, we should set $\tau_{k+1}$ such that uphill moves from ($(x, k) \rightarrow (x, k+1)$) should have a considerable probability of being accepted. 
+	- Build the *temperature ladder* step by step until we have a sufficiently smooth distribution at the top.
+
+. . .
+
+- The time spent on the base level $\tau_0$ is around $1 / (1 + m)$. If we have too many levels, only a very small portion of samples can be used. 
+
+. . .
+
+- The normalzing constants $Z_k$ are typically unknown and estimating them is very difficult and expensive.
+
+---
+
+
+
+
+
 
 
 
