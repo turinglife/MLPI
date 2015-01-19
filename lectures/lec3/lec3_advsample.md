@@ -7,8 +7,7 @@ shorttitle: Lecture 3
 
 - Partially Collapsed Sampling
 - Sampling with Auxiliary Variables 
-	- Simulated Tempering
-	- Parallel Tempering
+	- Simulated Tempering & Parallel Tempering
 	- Slice Sampling
 	- Swendsen-Wang Algorithm
 	- Hybrid Monte Carlo
@@ -265,11 +264,70 @@ One iteration of *Simulated Tempering* consists of two steps:
 
 ---
 
+**Parallel Tempering**
 
+---
 
+# Parallel Tempering #
 
+- **(Basic idea):** rather than jumping between temperatures, it *simultaneously* simulate multiple chains, each at a temperature level $\tau_k$, called a *replica*, and constantly swap samples between replicas. 
 
+. . .
 
+- **(Algorithm):** each iteration consists of the following steps:
+	- *(Parallel update):* simulate each replica with its own transition kernel
+	- *(Replica exchange):* propose to swap states between two replicas (say the $i$-th and $j$-th, where $j = i \pm 1$): 
+
+		$$(x_t^{(i)}, x_t^{(j)}) \rightarrow (x_{t+1}^{(i)} = x_t^{(j)}, x_{t+1}^{(j)} = x_t^{(i)})$$
+	
+		The proposal is accepted with probability $a(i, j|x_t) = \min\{1, r(i, j|x_t)\}$, where
+		
+		$$r(i, j | x) = \exp\left((\tau_k^{-1} - \tau_{k+1}^{-1}) (E(x^{(i)}) - E(x^{(j)})\right)$$	
+	- We collect samples from the base replica (the one with $\tau_0 = 1$).
+
+. . .
+
+- Why does this algorithm produce the desired distribution?
+
+---
+
+# Parallel Tempering (Justification) #
+
+- Let $\mathbf{x} = (x^{(0)}, \ldots, x^{(m)})$. We define
+
+	$$p(\mathbf{x}) = \prod_{k=1}^m p_k(x^{(k)}), 
+	\ \text{ with } 
+	p_k(x) = \frac{1}{Z_k} \exp \left( 
+		- \frac{E(x)}{\tau_k}
+	\right)$$
+
+. . .
+
+- Obviously, the step of *parallel update* preserves the invariant distribution $p(\mathbf{x})$. 
+
+. . .
+
+- Note that the step of *replica exchange* is *symmetric*, *i.e.* the probabilities of going up and down are equal, then according to the *Metropolis algorithm*, we have $a = \min(1, r)$ with
+
+	$$r = \frac{p(\mathbf{x'})}{p(\mathbf{x})}
+	= \frac{p_i(x^{(j)}) p_j(x^{(i)})}{p_i(x^{(i)})p_j(x^{(j)})}
+	= \left(\tau_i^{-1} - \tau_j^{-1} \right)\left(E(x^{(i)}) - E(x^{(j)})\right).$$
+
+---
+
+# Parallel Tempering (Discussion) #
+
+- It is often an *art* instead of a *technique* to tune a parallel tempering system (both the temperature ladder and the controlling parameter of each individual chain). 
+
+. . .
+
+- The *parallel tempering* is a special case of a large family of MCMC methods called *Extended Ensemble Monte Carlo*, which involves a collection of *parallel* Markov chains and the simulation switches between these them.  
+
+---
+
+**Swendsen-Wang Algorithm**
+
+---
 
 
 
