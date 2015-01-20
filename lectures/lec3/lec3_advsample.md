@@ -251,7 +251,7 @@ We begin with the Metropolis algorithm. In each iteration
 # Elliptical Slice Sampling (One Update Iteration) #
 
 \begin{center}
-\includegraphics[width=0.85\textwidth]{imgs/essalg.pdf}
+\includegraphics[width=0.85\textwidth]{imgs/essalg1.png}
 \end{center}
 
 
