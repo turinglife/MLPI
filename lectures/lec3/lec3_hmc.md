@@ -208,3 +208,6 @@ Each iteration of HMC comprises two steps:
 	- One should choose $\epsilon$ such that the energy trajectory is stable and the acceptance rate is maintained at a reasonably high level.
 	- One should choose $L$ such that back-and-forth movement of the states can be observed. 
 
+---
+
+
