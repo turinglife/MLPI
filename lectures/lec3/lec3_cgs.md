@@ -11,8 +11,6 @@ shorttitle: Lecture 3
 	- Simulated Tempering & Parallel Tempering
 	- Swendsen-Wang Algorithm
 - Hamiltonian Monte Carlo
-- Reversible Jump
-- Particle Filtering
 
 ---
 
