@@ -5,7 +5,7 @@ shorttitle: Lecture 3
 
 # Overview #
 
-- Partially Collapsed Sampling
+- Collapsed Gibbs Sampling
 - Sampling with Auxiliary Variables 
 	- Slice Sampling
 	- Simulated Tempering & Parallel Tempering
@@ -16,7 +16,7 @@ shorttitle: Lecture 3
 
 ---
 
-**Partially Collapsed Sampling**
+**Collapsed Gibbs Sampling**
 
 ---
 
