@@ -24,4 +24,6 @@ lectures:
     - pre: lec3
       name: advsample
       src:
-        - advsample
+        - cgs
+        - avs
+        - hmc
